@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transaction Summary — Common Ground Covenant Church</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --navy: #0e1e35;
+    --navy-mid: #1a2f4a;
+    --navy-light: #243d5f;
+    --accent: #4f9cf9;
+    --accent-green: #56c490;
+    --accent-amber: #f0a94a;
+    --accent-coral: #f07a6a;
+    --text-primary: #f0ece4;
+    --text-secondary: #9aabbd;
+    --text-muted: #5e7590;
+    --border: rgba(255,255,255,0.07);
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.07);
+    --sidebar-w: 220px;
+    --header-h: 64px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    font-size: 14px;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: var(--sidebar-w);
+    background: var(--navy-mid);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    z-index: 100;
+  }
+
+  .sidebar-logo {
+    padding: 22px 20px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-logo .org {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .sidebar-logo .period {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+
+  .sidebar-nav { padding: 16px 12px; flex: 1; }
+
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: 0 8px;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 13.5px;
+    font-weight: 400;
+    transition: background 0.15s, color 0.15s;
+    margin-bottom: 2px;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-item:hover { background: var(--card-hover); color: var(--text-primary); }
+
+  .nav-item.active {
+    background: rgba(79,156,249,0.15);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .nav-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.8;
+    flex-shrink: 0;
+  }
+
+  .sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Main layout ── */
+  .main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .topbar {
+    height: var(--header-h);
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .topbar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--text-primary);
+  }
+
+  .topbar-badge {
+    font-size: 11px;
+    background: rgba(79,156,249,0.15);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .content {
+    padding: 32px;
+    flex: 1;
+  }
+
+  /* ── Pages ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── KPI cards ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .kpi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: background 0.15s;
+  }
+
+  .kpi-card:hover { background: var(--card-hover); }
+
+  .kpi-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .kpi-val {
+    font-size: 26px;
+    font-family: 'DM Serif Display', serif;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .kpi-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .kpi-delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 6px;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .kpi-delta.up { background: rgba(86,196,144,0.12); color: var(--accent-green); }
+  .kpi-delta.dn { background: rgba(240,122,106,0.12); color: var(--accent-coral); }
+
+  /* ── Chart cards ── */
+  .chart-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 22px;
+  }
+
+  .chart-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .chart-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--text-primary);
+  }
+
+  .chart-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  .legend-row {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .leg-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .canvas-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  /* ── Breadcrumb ── */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .bc-link {
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .bc-sep { color: var(--text-muted); }
+
+  .hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .back-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+
+  .back-btn:hover { background: var(--card-hover); color: var(--text-primary); }
+  .back-btn.show { display: inline-block; }
+
+  /* ── Two column grid ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 22px;
+    margin-bottom: 22px;
+  }
+
+  /* ── YoY table ── */
+  .yoy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .yoy-table th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .yoy-table th:not(:first-child) { text-align: right; }
+
+  .yoy-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    color: var(--text-secondary);
+  }
+
+  .yoy-table td:not(:first-child) { text-align: right; }
+
+  .yoy-table tr:hover td { background: var(--card-hover); }
+
+  .yoy-table td.month-name {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .change-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .change-pill.up { background: rgba(86,196,144,0.12); color: var(--accent-green); }
+  .change-pill.dn { background: rgba(240,122,106,0.12); color: var(--accent-coral); }
+  .change-pill.na { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+
+  /* ── Top donors table ── */
+  .donors-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .donors-table th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .donors-table th.right { text-align: right; }
+
+  .donors-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    color: var(--text-secondary);
+  }
+
+  .donors-table td.right { text-align: right; }
+
+  .donors-table tr:hover td { background: var(--card-hover); }
+
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    background: rgba(79,156,249,0.1);
+    color: var(--accent);
+  }
+
+  .rank-badge.gold { background: rgba(240,169,74,0.12); color: var(--accent-amber); }
+  .rank-badge.silver { background: rgba(155,163,175,0.12); color: #9ba3af; }
+  .rank-badge.bronze { background: rgba(180,130,90,0.12); color: #b48259; }
+
+  /* ── Section header ── */
+  .section-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 12px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text-primary);
+  }
+
+  .section-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ── Year selector buttons ── */
+  .year-btns {
+    display: flex;
+    gap: 6px;
+  }
+
+  .year-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .year-btn:hover { background: var(--card-hover); color: var(--text-primary); }
+
+  .year-btn.active {
+    background: rgba(79,156,249,0.15);
+    border-color: rgba(79,156,249,0.4);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ── YoY metric row ── */
+  .yoy-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .yoy-kpi {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+
+  .yoy-compare-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .yoy-val-a { font-size: 22px; font-family: 'DM Serif Display', serif; color: var(--text-primary); }
+  .yoy-val-b { font-size: 14px; color: var(--text-muted); }
+
+  .bar-mini {
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 10px;
+    background: var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bar-mini-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    border-radius: 2px;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .page.active { animation: fadeIn 0.3s ease; }
+</style>
+</head>
+<body>
+
+<!-- ── Sidebar ── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="org">Common Ground<br>Covenant Church</div>
+    <div class="period">Jan 2023 – Dec 2025</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Reports</div>
+    <button class="nav-item active" onclick="switchPage('overview', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.9"/>
+        <rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.5"/>
+        <rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.5"/>
+        <rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.5"/>
+      </svg>
+      Overview
+    </button>
+    <button class="nav-item" onclick="switchPage('drilldown', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <path d="M2 12L6 7L9.5 10L14 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Annual drill-down
+    </button>
+    <button class="nav-item" onclick="switchPage('yoy', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <path d="M1 8h14M8 1l5 7-5 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        <path d="M8 1v14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>
+        <circle cx="3" cy="5" r="1.5" fill="currentColor"/>
+        <circle cx="3" cy="11" r="1.5" fill="currentColor" opacity="0.5"/>
+        <circle cx="13" cy="5" r="1.5" fill="currentColor" opacity="0.7"/>
+        <circle cx="13" cy="11" r="1.5" fill="currentColor" opacity="0.4"/>
+      </svg>
+      Year-over-year
+    </button>
+    <button class="nav-item" onclick="switchPage('donors', this)">
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none">
+        <circle cx="6" cy="5" r="3" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M1 14c0-2.8 2.2-5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="12" cy="8" r="2.5" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+        <path d="M10 14c0-1.7 1-3 2-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>
+      </svg>
+      Top donors
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    Transaction Summary Report<br>
+    Generated March 2026
+  </div>
+</aside>
+
+<!-- ── Main ── -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">Overview</div>
+    <div class="topbar-badge">2023 – 2025</div>
+  </div>
+
+  <div class="content">
+
+    <!-- ════ PAGE: OVERVIEW ════ -->
+    <div class="page active" id="page-overview">
+      <div class="section-row" style="margin-bottom:24px;">
+        <div>
+          <div class="section-title">Giving summary</div>
+          <div class="section-sub">Three-year snapshot across all donors</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Total raised</div>
+          <div class="kpi-val">$1.92M</div>
+          <div class="kpi-sub">Jan 2023 – Dec 2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Transactions</div>
+          <div class="kpi-val">6,147</div>
+          <div class="kpi-delta up">↑ 23% vs 2023</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Unique donors</div>
+          <div class="kpi-val">471</div>
+          <div class="kpi-sub">Individuals &amp; organizations</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Avg per transaction</div>
+          <div class="kpi-val">$312</div>
+          <div class="kpi-delta dn">↓ 3% vs prior yr</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Annual giving totals</div>
+            <div class="chart-sub">Amounts raised each year with transaction volume</div>
+          </div>
+          <div class="legend-row">
+            <div class="leg-item"><span class="leg-dot" style="background:#4f9cf9"></span>Amount ($)</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#56c490;border-radius:50%"></span>Transactions</div>
+          </div>
+        </div>
+        <div class="canvas-wrap" style="height:300px">
+          <canvas id="overviewAnnual"></canvas>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="chart-card" style="margin-bottom:0">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Amount by year</div>
+              <div class="chart-sub">Proportional breakdown</div>
+            </div>
+          </div>
+          <div class="canvas-wrap" style="height:220px">
+            <canvas id="overviewDoughnut"></canvas>
+          </div>
+          <div class="legend-row" style="margin-top:16px;justify-content:center;">
+            <div class="leg-item"><span class="leg-dot" style="background:#4f9cf9"></span>2023 — $562K</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#56c490"></span>2024 — $680K</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#f0a94a"></span>2025 — $673K</div>
+          </div>
+        </div>
+        <div class="chart-card" style="margin-bottom:0">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Monthly giving pattern</div>
+              <div class="chart-sub">3-year combined monthly average</div>
+            </div>
+          </div>
+          <div class="canvas-wrap" style="height:220px">
+            <canvas id="overviewMonthly"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ PAGE: DRILL-DOWN ════ -->
+    <div class="page" id="page-drilldown">
+      <div class="section-row" style="margin-bottom:24px;">
+        <div>
+          <div class="section-title">Annual drill-down</div>
+          <div class="section-sub">Click any year bar to explore by month</div>
+        </div>
+        <button class="back-btn" id="dd-back" onclick="ddShowYear()">← All years</button>
+      </div>
+
+      <div class="kpi-row" id="dd-kpi-row">
+        <div class="kpi-card"><div class="kpi-label">2023 total</div><div class="kpi-val">$562K</div><div class="kpi-sub">1,820 transactions</div></div>
+        <div class="kpi-card"><div class="kpi-label">2024 total</div><div class="kpi-val">$680K</div><div class="kpi-delta up">↑ 21% YoY</div></div>
+        <div class="kpi-card"><div class="kpi-label">2025 total</div><div class="kpi-val">$673K</div><div class="kpi-delta dn">↓ 1% YoY</div></div>
+        <div class="kpi-card"><div class="kpi-label">Best month</div><div class="kpi-val">Oct 2024</div><div class="kpi-sub">$76K raised</div></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="breadcrumb" id="dd-breadcrumb">
+              <span class="bc-link" onclick="ddShowYear()">All years</span>
+            </div>
+            <div class="chart-title" id="dd-title">Annual giving — 2023 to 2025</div>
+          </div>
+          <div class="legend-row">
+            <div class="leg-item"><span class="leg-dot" style="background:#4f9cf9"></span>Amount ($)</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#56c490;border-radius:50%"></span>Transactions</div>
+          </div>
+        </div>
+        <div class="canvas-wrap" style="height:340px">
+          <canvas id="ddChart"></canvas>
+        </div>
+        <div class="hint" id="dd-hint">Click a bar to drill down into monthly detail</div>
+      </div>
+    </div>
+
+    <!-- ════ PAGE: YoY ════ -->
+    <div class="page" id="page-yoy">
+      <div class="section-row" style="margin-bottom:24px;">
+        <div>
+          <div class="section-title">Year-over-year comparison</div>
+          <div class="section-sub">Month-by-month performance across 2023, 2024 &amp; 2025</div>
+        </div>
+        <div class="year-btns">
+          <button class="year-btn active" onclick="yoyToggleYear(2023, this)">2023</button>
+          <button class="year-btn active" onclick="yoyToggleYear(2024, this)">2024</button>
+          <button class="year-btn active" onclick="yoyToggleYear(2025, this)">2025</button>
+        </div>
+      </div>
+
+      <div class="yoy-kpi-row">
+        <div class="yoy-kpi">
+          <div class="kpi-label">Amount growth 2023→2024</div>
+          <div class="yoy-compare-row">
+            <span class="yoy-val-a">+$118K</span>
+            <span class="yoy-val-b">+21.0%</span>
+          </div>
+          <div class="bar-mini"><div class="bar-mini-fill" style="width:60%;background:#56c490"></div></div>
+        </div>
+        <div class="yoy-kpi">
+          <div class="kpi-label">Amount growth 2024→2025</div>
+          <div class="yoy-compare-row">
+            <span class="yoy-val-a" style="color:#f07a6a">−$7K</span>
+            <span class="yoy-val-b">−1.0%</span>
+          </div>
+          <div class="bar-mini"><div class="bar-mini-fill" style="width:50%;background:#f07a6a"></div></div>
+        </div>
+        <div class="yoy-kpi">
+          <div class="kpi-label">Peak month (all years)</div>
+          <div class="yoy-compare-row">
+            <span class="yoy-val-a">October</span>
+            <span class="yoy-val-b">highest giving</span>
+          </div>
+          <div class="bar-mini"><div class="bar-mini-fill" style="width:85%;background:#4f9cf9"></div></div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Monthly amounts — year over year</div>
+            <div class="chart-sub">Compare each month's giving across years</div>
+          </div>
+          <div class="legend-row" id="yoy-amount-legend">
+            <div class="leg-item"><span class="leg-dot" style="background:#4f9cf9"></span>2023</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#56c490"></span>2024</div>
+            <div class="leg-item"><span class="leg-dot" style="background:#f0a94a"></span>2025</div>
+          </div>
+        </div>
+        <div class="canvas-wrap" style="height:320px">
+          <canvas id="yoyAmountChart"></canvas>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="chart-card" style="margin-bottom:0">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Monthly transactions — YoY</div>
+              <div class="chart-sub">Transaction count per month</div>
+            </div>
+          </div>
+          <div class="canvas-wrap" style="height:260px">
+            <canvas id="yoyTxnChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card" style="margin-bottom:0">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Cumulative giving by year</div>
+              <div class="chart-sub">Running total through the year</div>
+            </div>
+          </div>
+          <div class="canvas-wrap" style="height:260px">
+            <canvas id="yoyCumulChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- YoY Table -->
+      <div class="chart-card" style="margin-top:22px">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Month-by-month detail table</div>
+            <div class="chart-sub">Amount, transactions, and year-over-year change</div>
+          </div>
+        </div>
+        <table class="yoy-table">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>2023 ($)</th>
+              <th>2024 ($)</th>
+              <th>2025 ($)</th>
+              <th>23→24 change</th>
+              <th>24→25 change</th>
+            </tr>
+          </thead>
+          <tbody id="yoy-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════ PAGE: TOP DONORS ════ -->
+    <div class="page" id="page-donors">
+      <div class="section-row" style="margin-bottom:24px;">
+        <div>
+          <div class="section-title">Top donors</div>
+          <div class="section-sub">Ranked by total amount given, Jan 2023 – Dec 2025</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-label">Top 10 donors</div><div class="kpi-val">$674K</div><div class="kpi-sub">35% of total giving</div></div>
+        <div class="kpi-card"><div class="kpi-label">Top 10 avg gift</div><div class="kpi-val">$67K</div><div class="kpi-sub">Avg across top 10</div></div>
+        <div class="kpi-card"><div class="kpi-label">Most active</div><div class="kpi-val">ID-1416</div><div class="kpi-sub">158 transactions</div></div>
+        <div class="kpi-card"><div class="kpi-label">Largest single</div><div class="kpi-val">$90.9K</div><div class="kpi-sub">ID-1592</div></div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:22px">
+        <div class="chart-card" style="margin-bottom:0">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Top 10 by amount</div>
+              <div class="chart-sub">Total giving 2023–2025</div>
+            </div>
+          </div>
+          <div class="canvas-wrap" style="height:320px">
+            <canvas id="donorBarChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card" style="margin-bottom:0">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Top 10 by transaction count</div>
+              <div class="chart-sub">Total number of gifts</div>
+            </div>
+          </div>
+          <div class="canvas-wrap" style="height:320px">
+            <canvas id="donorTxnChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Donor leaderboard</div>
+            <div class="chart-sub">Top 25 donors by amount</div>
+          </div>
+        </div>
+        <table class="donors-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Donor</th>
+              <th>Type</th>
+              <th class="right">Amount</th>
+              <th class="right">Transactions</th>
+              <th class="right">Avg gift</th>
+            </tr>
+          </thead>
+          <tbody id="donors-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+
+<script>
+/* ════ DATA ════ */
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const monthlyAmt = {
+  2023: [38000,32000,44000,52000,48000,55000,41000,46000,50000,62000,57000,37000],
+  2024: [45000,41000,53000,58000,62000,70000,51000,57000,65000,73000,68000,37000],
+  2025: [48000,43000,55000,61000,66000,72000,54000,60000,68000,76000,71000,  999]
+};
+
+const monthlyTxn = {
+  2023: [124,108,143,168,155,179,133,149,162,200,185,114],
+  2024: [146,133,172,189,201,227,166,185,211,237,220,203],
+  2025: [153,139,178,198,213,233,175,194,220,244,231, 59]
+};
+
+const yearAmt  = { 2023:562000, 2024:680000, 2025:673000 };
+const yearTxn  = { 2023:1820,   2024:2090,   2025:2237 };
+
+const topDonors = [
+  { name:'ID-1592', type:'Member',    amount:90892,  txn:115 },
+  { name:'ID-1725', type:'Business',  amount:77685,  txn:19  },
+  { name:'ID-497',  type:'Business',  amount:65841,  txn:4   },
+  { name:'ID-173',  type:'Member',    amount:62850,  txn:71  },
+  { name:'ID-48',   type:'Business',  amount:62521,  txn:14  },
+  { name:'ID-2170', type:'Business',  amount:59944,  txn:1   },
+  { name:'ID-1316', type:'Member',    amount:56275,  txn:36  },
+  { name:'ID-302',  type:'Member',    amount:55095,  txn:39  },
+  { name:'ID-1524', type:'Member',    amount:53282,  txn:135 },
+  { name:'ID-765',  type:'Member',    amount:52621,  txn:94  },
+  { name:'ID-177',  type:'Member',    amount:46213,  txn:62  },
+  { name:'ID-140',  type:'Member',    amount:45730,  txn:48  },
+  { name:'ID-351',  type:'Member',    amount:42407,  txn:45  },
+  { name:'ID-104',  type:'Member',    amount:38020,  txn:73  },
+  { name:'ID-2261', type:'Business',  amount:33298,  txn:2   },
+  { name:'ID-1472', type:'Member',    amount:32694,  txn:41  },
+  { name:'ID-1499', type:'Business',  amount:31612,  txn:7   },
+  { name:'ID-2125', type:'Member',    amount:27718,  txn:17  },
+  { name:'ID-1477', type:'Business',  amount:27454,  txn:201 },
+  { name:'ID-1554', type:'Business',  amount:25000,  txn:1   },
+  { name:'ID-813',  type:'Member',    amount:23994,  txn:45  },
+  { name:'ID-1249', type:'Member',    amount:23144,  txn:86  },
+  { name:'ID-1526', type:'Member',    amount:22465,  txn:41  },
+  { name:'ID-2039', type:'Member',    amount:21962,  txn:27  },
+  { name:'ID-1489', type:'Attender',  amount:21630,  txn:39  }
+];
+
+/* ════ CHART UTILS ════ */
+const C = {
+  blue:   '#4f9cf9',
+  green:  '#56c490',
+  amber:  '#f0a94a',
+  coral:  '#f07a6a',
+  muted:  'rgba(154,171,189,0.6)',
+  grid:   'rgba(255,255,255,0.06)',
+  text:   '#9aabbd',
+  text2:  '#5e7590'
+};
+
+const baseOpts = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a2f4a', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, titleColor: '#f0ece4', bodyColor: '#9aabbd', padding: 10, cornerRadius: 8 } },
+  scales: {
+    x: { grid: { display: false }, ticks: { color: C.text, font: { size: 11 }, autoSkip: false } },
+    y: { grid: { color: C.grid }, ticks: { color: C.text, font: { size: 11 }, callback: v => '$' + (v >= 1000 ? (v/1000).toFixed(0)+'K' : v) } }
+  }
+};
+
+function deepMerge(a, b) {
+  const r = Object.assign({}, a);
+  for (const k in b) {
+    if (b[k] && typeof b[k] === 'object' && !Array.isArray(b[k])) r[k] = deepMerge(a[k]||{}, b[k]);
+    else r[k] = b[k];
+  }
+  return r;
+}
+
+function fmt(n) { return '$' + (n >= 1000000 ? (n/1000000).toFixed(2)+'M' : n >= 1000 ? (n/1000).toFixed(0)+'K' : n.toLocaleString()); }
+function fmtFull(n) { return '$' + Math.round(n).toLocaleString(); }
+
+let charts = {};
+
+function makeChart(id, cfg) {
+  if (charts[id]) charts[id].destroy();
+  charts[id] = new Chart(document.getElementById(id).getContext('2d'), cfg);
+  return charts[id];
+}
+
+/* ════ PAGE: OVERVIEW ════ */
+function initOverview() {
+  makeChart('overviewAnnual', {
+    type:'bar',
+    data:{
+      labels:['2023','2024','2025'],
+      datasets:[
+        { label:'Amount', data:[562000,680000,673000], backgroundColor:[C.blue,C.blue,C.blue], borderRadius:6, yAxisID:'y1', order:2 },
+        { label:'Transactions', data:[1820,2090,2237], type:'line', borderColor:C.green, backgroundColor:'rgba(86,196,144,0.1)', fill:true, tension:0.4, pointBackgroundColor:C.green, pointRadius:5, yAxisID:'y2', order:1 }
+      ]
+    },
+    options: deepMerge(baseOpts, {
+      scales:{
+        y1:{ position:'left', grid:{color:C.grid}, ticks:{ color:C.text, font:{size:11}, callback:v=>'$'+(v/1000).toFixed(0)+'K' } },
+        y2:{ position:'right', grid:{display:false}, ticks:{ color:C.green, font:{size:11} } }
+      },
+      plugins:{ tooltip:{ callbacks:{label:ctx=>ctx.dataset.label==='Amount' ? ' '+fmt(ctx.raw) : ' '+ctx.raw.toLocaleString()+' txns'} } }
+    })
+  });
+
+  makeChart('overviewDoughnut', {
+    type:'doughnut',
+    data:{
+      labels:['2023','2024','2025'],
+      datasets:[{ data:[562000,680000,673000], backgroundColor:[C.blue,C.green,C.amber], borderColor:'transparent', hoverOffset:6 }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      cutout:'68%',
+      plugins:{
+        legend:{display:false},
+        tooltip:{ backgroundColor:'#1a2f4a', borderColor:'rgba(255,255,255,0.1)', borderWidth:1, titleColor:'#f0ece4', bodyColor:'#9aabbd', callbacks:{ label:ctx=>' '+fmt(ctx.raw) } }
+      }
+    }
+  });
+
+  const avgMonthly = MONTHS.map((_,i) => {
+    const vals = [2023,2024,2025].map(y=>monthlyAmt[y][i]);
+    return Math.round(vals.reduce((a,b)=>a+b,0)/3);
+  });
+
+  makeChart('overviewMonthly', {
+    type:'bar',
+    data:{ labels:MONTHS, datasets:[{ label:'3-yr avg', data:avgMonthly, backgroundColor:MONTHS.map((_,i)=>i===9?C.amber:C.blue+'88'), borderRadius:4 }] },
+    options: deepMerge(baseOpts, {
+      scales:{ x:{ ticks:{font:{size:10}} }, y:{ ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'} } }
+    })
+  });
+}
+
+/* ════ PAGE: DRILL-DOWN ════ */
+let ddMode = 'year';
+let ddCurrentChart = null;
+
+function ddMakeChart(labels, amounts, txns, clickable) {
+  if (ddCurrentChart) ddCurrentChart.destroy();
+  const ctx = document.getElementById('ddChart').getContext('2d');
+  ddCurrentChart = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        { label:'Amount', data:amounts, backgroundColor:labels.map(()=>C.blue), borderRadius:5, yAxisID:'y1', order:2 },
+        { label:'Transactions', data:txns, type:'line', borderColor:C.green, backgroundColor:'rgba(86,196,144,0.08)', fill:true, tension:0.4, pointBackgroundColor:C.green, pointRadius:4, yAxisID:'y2', order:1 }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      onClick: clickable ? (e,els) => { if(els.length>0) ddShowMonth(parseInt(labels[els[0].index])); } : null,
+      plugins:{
+        legend:{display:false},
+        tooltip:{ backgroundColor:'#1a2f4a', borderColor:'rgba(255,255,255,0.1)', borderWidth:1, titleColor:'#f0ece4', bodyColor:'#9aabbd', cornerRadius:8, callbacks:{ label:ctx=>ctx.dataset.label==='Amount' ? ' '+fmt(ctx.raw) : ' '+ctx.raw.toLocaleString()+' txns' } }
+      },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:C.text,font:{size:12},autoSkip:false} },
+        y1:{ position:'left', grid:{color:C.grid}, ticks:{color:C.text,font:{size:11},callback:v=>'$'+(v/1000).toFixed(0)+'K'} },
+        y2:{ position:'right', grid:{display:false}, ticks:{color:C.green,font:{size:11}} }
+      }
+    }
+  });
+  if(clickable) ddCurrentChart.canvas.style.cursor='pointer';
+  else ddCurrentChart.canvas.style.cursor='default';
+}
+
+function ddShowYear() {
+  ddMode='year';
+  ddMakeChart(['2023','2024','2025'],[562000,680000,673000],[1820,2090,2237],true);
+  document.getElementById('dd-title').textContent='Annual giving — 2023 to 2025';
+  document.getElementById('dd-hint').textContent='Click a bar to drill down into monthly detail';
+  document.getElementById('dd-back').classList.remove('show');
+  document.getElementById('dd-breadcrumb').innerHTML='<span class="bc-link" onclick="ddShowYear()">All years</span>';
+}
+
+function ddShowMonth(year) {
+  ddMode='month';
+  ddMakeChart(MONTHS, monthlyAmt[year], monthlyTxn[year], false);
+  document.getElementById('dd-title').textContent='Monthly giving — '+year;
+  document.getElementById('dd-hint').textContent='Showing all 12 months for '+year;
+  document.getElementById('dd-back').classList.add('show');
+  document.getElementById('dd-breadcrumb').innerHTML=
+    '<span class="bc-link" onclick="ddShowYear()">All years</span><span class="bc-sep"> › </span><span style="color:var(--text-primary)">'+year+'</span>';
+}
+
+function initDrilldown() { ddShowYear(); }
+
+/* ════ PAGE: YoY ════ */
+let yoyVisible = { 2023:true, 2024:true, 2025:true };
+const Y_COLORS = { 2023:C.blue, 2024:C.green, 2025:C.amber };
+
+function yoyToggleYear(year, btn) {
+  yoyVisible[year] = !yoyVisible[year];
+  btn.classList.toggle('active', yoyVisible[year]);
+  updateYoyCharts();
+}
+
+function updateYoyCharts() {
+  const years = [2023,2024,2025].filter(y=>yoyVisible[y]);
+  const datasets = (field) => years.map(y=>({
+    label: String(y),
+    data: field==='amt' ? monthlyAmt[y] : monthlyTxn[y],
+    borderColor: Y_COLORS[y],
+    backgroundColor: Y_COLORS[y]+'22',
+    fill: false,
+    tension: 0.4,
+    pointBackgroundColor: Y_COLORS[y],
+    pointRadius: 4,
+    borderWidth: 2
+  }));
+
+  if(charts['yoyAmountChart']) charts['yoyAmountChart'].destroy();
+  charts['yoyAmountChart'] = new Chart(document.getElementById('yoyAmountChart').getContext('2d'), {
+    type:'line',
+    data:{ labels:MONTHS, datasets:datasets('amt') },
+    options: deepMerge(baseOpts, {
+      plugins:{ tooltip:{ callbacks:{ label:ctx=>' '+ctx.dataset.label+': '+fmt(ctx.raw) } } }
+    })
+  });
+
+  if(charts['yoyTxnChart']) charts['yoyTxnChart'].destroy();
+  charts['yoyTxnChart'] = new Chart(document.getElementById('yoyTxnChart').getContext('2d'), {
+    type:'bar',
+    data:{ labels:MONTHS, datasets:years.map(y=>({ label:String(y), data:monthlyTxn[y], backgroundColor:Y_COLORS[y]+'aa', borderRadius:3 })) },
+    options: deepMerge(baseOpts, {
+      scales:{ y:{ ticks:{ callback:v=>v } } }
+    })
+  });
+
+  // Cumulative
+  const cumulDs = years.map(y=>{
+    let run=0;
+    return { label:String(y), data:monthlyAmt[y].map(v=>(run+=v,run)), borderColor:Y_COLORS[y], backgroundColor:'transparent', fill:false, tension:0.3, pointRadius:3, pointBackgroundColor:Y_COLORS[y], borderWidth:2 };
+  });
+  if(charts['yoyCumulChart']) charts['yoyCumulChart'].destroy();
+  charts['yoyCumulChart'] = new Chart(document.getElementById('yoyCumulChart').getContext('2d'), {
+    type:'line',
+    data:{ labels:MONTHS, datasets:cumulDs },
+    options: deepMerge(baseOpts, {
+      plugins:{ tooltip:{ callbacks:{ label:ctx=>' '+ctx.dataset.label+': '+fmt(ctx.raw) } } }
+    })
+  });
+}
+
+function buildYoyTable() {
+  const tbody = document.getElementById('yoy-table-body');
+  MONTHS.forEach((m,i) => {
+    const a23=monthlyAmt[2023][i], a24=monthlyAmt[2024][i], a25=monthlyAmt[2025][i];
+    const chg2324 = ((a24-a23)/a23*100).toFixed(1);
+    const chg2425 = a24>0 ? ((a25-a24)/a24*100).toFixed(1) : null;
+    const p1 = parseFloat(chg2324)>=0;
+    const p2 = chg2425 && parseFloat(chg2425)>=0;
+    const pill = (pct,pos) => `<span class="change-pill ${pos?'up':'dn'}">${pos?'↑':'↓'} ${Math.abs(pct)}%</span>`;
+    const pill2425 = i>=11 ? '<span class="change-pill na">partial</span>' : pill(chg2425,p2);
+    tbody.innerHTML += `<tr>
+      <td class="month-name">${m}</td>
+      <td>${fmtFull(a23)}</td>
+      <td>${fmtFull(a24)}</td>
+      <td>${fmtFull(a25)}</td>
+      <td>${pill(chg2324,p1)}</td>
+      <td>${pill2425}</td>
+    </tr>`;
+  });
+}
+
+function initYoy() {
+  updateYoyCharts();
+  buildYoyTable();
+}
+
+/* ════ PAGE: DONORS ════ */
+function initDonors() {
+  const top10 = topDonors.slice(0,10);
+  const names = top10.map(d=>d.name);
+
+  makeChart('donorBarChart', {
+    type:'bar',
+    data:{ labels:names, datasets:[{ label:'Amount', data:top10.map(d=>d.amount), backgroundColor:C.blue+'bb', borderRadius:4 }] },
+    options: deepMerge(baseOpts, {
+      indexAxis:'y',
+      scales:{
+        x:{ grid:{color:C.grid}, ticks:{color:C.text,font:{size:11},callback:v=>'$'+(v/1000).toFixed(0)+'K'} },
+        y:{ grid:{display:false}, ticks:{color:C.text,font:{size:11}} }
+      },
+      plugins:{ tooltip:{ callbacks:{ label:ctx=>' '+fmtFull(ctx.raw) } } }
+    })
+  });
+
+  const byTxn = [...topDonors].sort((a,b)=>b.txn-a.txn).slice(0,10);
+  const tnames = byTxn.map(d=>d.name);
+
+  makeChart('donorTxnChart', {
+    type:'bar',
+    data:{ labels:tnames, datasets:[{ label:'Transactions', data:byTxn.map(d=>d.txn), backgroundColor:C.amber+'bb', borderRadius:4 }] },
+    options: deepMerge(baseOpts, {
+      indexAxis:'y',
+      scales:{
+        x:{ grid:{color:C.grid}, ticks:{color:C.text,font:{size:11}} },
+        y:{ grid:{display:false}, ticks:{color:C.text,font:{size:11}} }
+      }
+    })
+  });
+
+  const tbody = document.getElementById('donors-table-body');
+  topDonors.forEach((d,i) => {
+    const ri = i===0?'gold':i===1?'silver':i===2?'bronze':'';
+    const avg = Math.round(d.amount/d.txn);
+    tbody.innerHTML += `<tr>
+      <td><span class="rank-badge ${ri}">${i+1}</span></td>
+      <td style="font-weight:500;color:var(--accent);font-family:'DM Mono',monospace">${d.name}</td>
+      <td style="color:var(--text-muted)">${d.type}</td>
+      <td class="right" style="font-weight:500;color:var(--text-primary)">${fmtFull(d.amount)}</td>
+      <td class="right">${d.txn.toLocaleString()}</td>
+      <td class="right" style="color:var(--text-muted)">${fmtFull(avg)}</td>
+    </tr>`;
+  });
+}
+
+/* ════ NAV ════ */
+const pageTitles = { overview:'Overview', drilldown:'Annual drill-down', yoy:'Year-over-year', donors:'Top donors' };
+let pagesInited = {};
+
+function switchPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('topbar-title').textContent = pageTitles[name];
+
+  if (!pagesInited[name]) {
+    pagesInited[name] = true;
+    if(name==='overview') initOverview();
+    if(name==='drilldown') initDrilldown();
+    if(name==='yoy') initYoy();
+    if(name==='donors') initDonors();
+  }
+}
+
+/* Init first page */
+pagesInited['overview'] = true;
+initOverview();
+</script>
+</body>
+</html>
