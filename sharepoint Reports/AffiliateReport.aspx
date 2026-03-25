@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -7,150 +7,95 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --navy: #1a3a6b; --navy-light: #2a52a0; --navy-dim: #3a6abf;
-      --bg: #ffffff; --panel: #f4f6fa; --panel2: #eef1f7;
-      --border: rgba(26,58,107,0.18); --text: #111111;
-      --text-muted: #555e70; --radius: 10px;
-      --gold: #c8a85a; --gold-dim: #e0c98a;
+      --navy:#1a3a6b; --navy-light:#2a52a0; --navy-dim:#3a6abf;
+      --bg:#ffffff; --panel:#f4f6fa;
+      --border:rgba(26,58,107,0.15); --text:#111111;
+      --text-muted:#555e70; --radius:8px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Crimson Pro', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 120px; }
-    body::before { content:''; position:fixed; inset:0; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(26,58,107,0.05) 0%, transparent 70%); pointer-events:none; z-index:0; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:'Crimson Pro',Georgia,serif; background:var(--bg); color:var(--text); min-height:100vh; }
 
-    /* ── NAV ── */
-    nav { position:sticky; top:0; z-index:100; background:var(--navy); box-shadow:0 2px 14px rgba(26,58,107,0.22); display:flex; align-items:center; padding:0 32px; height:56px; gap:4px; }
-    .nav-brand { font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:#fff; letter-spacing:0.08em; margin-right:24px; white-space:nowrap; }
-    .nav-brand span { font-weight:400; opacity:0.65; font-size:10px; display:block; letter-spacing:0.14em; margin-top:1px; }
-    .nav-divider { width:1px; height:22px; background:rgba(255,255,255,0.15); margin:0 8px; }
-    .nav-link { font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.1em; color:rgba(255,255,255,0.7); text-decoration:none; padding:8px 16px; border-radius:5px; transition:all 0.18s; white-space:nowrap; }
-    .nav-link:hover { background:rgba(255,255,255,0.12); color:#fff; }
-    .nav-link.active { background:rgba(255,255,255,0.18); color:#fff; }
+    /* NAV */
+    nav{ position:sticky; top:0; z-index:100; background:var(--navy); box-shadow:0 2px 12px rgba(26,58,107,0.2); display:flex; align-items:center; padding:0 24px; height:52px; gap:4px; }
+    .nav-brand{ font-family:'Cinzel',serif; font-size:13px; font-weight:700; color:#fff; letter-spacing:0.08em; margin-right:20px; }
+    .nav-brand span{ font-weight:400; opacity:0.65; font-size:10px; display:block; letter-spacing:0.14em; }
+    .nav-divider{ width:1px; height:20px; background:rgba(255,255,255,0.15); margin:0 6px; }
+    .nav-link{ font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.1em; color:rgba(255,255,255,0.7); text-decoration:none; padding:7px 14px; border-radius:4px; transition:all 0.15s; }
+    .nav-link:hover{ background:rgba(255,255,255,0.12); color:#fff; }
+    .nav-link.active{ background:rgba(255,255,255,0.18); color:#fff; }
 
-    /* ── LAYOUT ── */
-    .container { position:relative; z-index:1; max-width:1280px; margin:0 auto; padding:0 32px 60px; }
+    /* PAGE HEADER */
+    .page-header{ padding:28px 24px 20px; border-bottom:1px solid var(--border); display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .eyebrow{ font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.3em; color:var(--navy-dim); text-transform:uppercase; margin-bottom:6px; }
+    h1{ font-family:'Cinzel',serif; font-size:clamp(18px,2.5vw,26px); font-weight:700; color:var(--navy); }
+    h1 span{ display:block; font-size:0.5em; font-weight:400; color:var(--text-muted); margin-top:3px; }
+    .header-meta{ font-size:12px; color:var(--text-muted); text-align:right; }
+    #last-updated{ color:var(--navy-dim); font-style:italic; }
 
-    /* ── HEADER ── */
-    header { padding:44px 0 30px; border-bottom:2px solid var(--border); margin-bottom:36px; display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; }
-    .eyebrow { font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.3em; color:var(--navy-dim); text-transform:uppercase; margin-bottom:10px; }
-    h1 { font-family:'Cinzel',serif; font-size:clamp(22px,3.5vw,36px); font-weight:700; color:var(--navy); line-height:1.1; }
-    h1 span { display:block; font-size:0.52em; font-weight:400; color:var(--text-muted); margin-top:5px; letter-spacing:0.01em; }
-    .header-meta { font-size:13px; color:var(--text-muted); text-align:right; }
-    #last-updated { color:var(--navy-dim); font-style:italic; }
+    /* MAIN SPLIT LAYOUT */
+    .report-layout{ display:flex; height:calc(100vh - 130px); min-height:500px; }
 
-    /* ── BUTTONS ── */
-    .btn { display:inline-flex; align-items:center; gap:8px; padding:9px 20px; border-radius:6px; font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.1em; cursor:pointer; border:none; transition:all 0.2s; }
-    .btn-primary { background:var(--navy); color:#fff; }
-    .btn-primary:hover { background:var(--navy-light); }
-    .btn-outline { background:transparent; color:var(--navy); border:1px solid var(--border); }
-    .btn-outline:hover { border-color:var(--navy); background:rgba(26,58,107,0.05); }
+    /* LEFT PANEL — Affiliates list */
+    .left-panel{ width:280px; flex-shrink:0; border-right:1px solid var(--border); display:flex; flex-direction:column; background:var(--panel); }
+    .left-panel-header{ padding:14px 16px 10px; border-bottom:1px solid var(--border); }
+    .panel-title{ font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--navy); margin-bottom:8px; }
+    .search-box{ position:relative; }
+    .search-box input{ width:100%; padding:7px 10px 7px 30px; border:1px solid var(--border); border-radius:6px; font-family:'Crimson Pro',serif; font-size:14px; background:#fff; outline:none; transition:border-color 0.2s; }
+    .search-box input:focus{ border-color:var(--navy-dim); }
+    .search-box svg{ position:absolute; left:9px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; }
+    .affiliate-list{ flex:1; overflow-y:auto; padding:6px 0; }
+    .affiliate-item{ padding:9px 16px; font-size:14px; cursor:pointer; transition:background 0.12s; border-radius:0; }
+    .affiliate-item:hover{ background:rgba(26,58,107,0.06); }
+    .affiliate-item.selected{ background:rgba(26,58,107,0.12); color:var(--navy); font-weight:600; border-left:3px solid var(--navy); padding-left:13px; }
 
-    /* ── FILTER BAR ── */
-    .filter-bar { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; margin-bottom:32px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-    .filter-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.2em; color:var(--navy-dim); text-transform:uppercase; white-space:nowrap; }
-    .filter-select-wrap { flex:1; min-width:220px; max-width:380px; }
-    select { width:100%; background:#fff; border:1px solid var(--border); color:var(--text); font-family:'Crimson Pro',serif; font-size:16px; border-radius:8px; padding:11px 16px; outline:none; transition:border-color 0.2s; cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23555e70' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:38px; }
-    select:focus { border-color:var(--navy-dim); }
-    select option { background:#f4f6fa; }
-    .filter-info { margin-left:auto; font-size:13px; color:var(--text-muted); display:flex; align-items:center; gap:12px; }
-    #result-summary { white-space:nowrap; }
+    /* RIGHT PANEL */
+    .right-panel{ flex:1; overflow-y:auto; display:flex; flex-direction:column; }
 
-    /* ── STATS ── */
-    .stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(155px,1fr)); gap:16px; margin-bottom:36px; }
-    .stat-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; position:relative; overflow:hidden; transition:box-shadow 0.2s; }
-    .stat-card:hover { box-shadow:0 4px 16px rgba(26,58,107,0.1); }
-    .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--navy),var(--navy-dim),transparent); }
-    .stat-label { font-size:10px; letter-spacing:0.18em; color:var(--text-muted); text-transform:uppercase; font-family:'Cinzel',serif; margin-bottom:8px; }
-    .stat-value { font-family:'Cinzel',serif; font-size:30px; font-weight:700; color:var(--navy); line-height:1; }
-    .stat-sub { font-size:12px; color:var(--text-muted); margin-top:5px; }
+    /* SECTION BLOCKS */
+    .section-block{ padding:20px 24px; border-bottom:1px solid var(--border); }
+    .section-block:last-child{ border-bottom:none; }
+    .section-heading{ font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--navy); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+    .section-heading .count-badge{ background:var(--navy); color:#fff; border-radius:10px; padding:1px 8px; font-size:10px; font-family:'Cinzel',serif; }
 
-    /* ── SECTION DIVIDER ── */
-    .section-divider { display:flex; align-items:center; gap:16px; margin:40px 0 24px; }
-    .section-title { font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.22em; text-transform:uppercase; color:var(--navy); white-space:nowrap; }
-    .section-line { flex:1; height:1px; background:var(--border); }
-    .section-count { font-family:'Cinzel',serif; font-size:11px; color:var(--text-muted); background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:2px 10px; }
+    /* TABLES */
+    .data-table-wrap{ border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+    .data-table{ width:100%; border-collapse:collapse; font-size:14px; }
+    .data-table thead{ background:rgba(26,58,107,0.06); border-bottom:1px solid var(--border); }
+    .data-table th{ font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.18em; color:var(--navy-dim); text-transform:uppercase; padding:9px 14px; text-align:center; white-space:nowrap; cursor:pointer; user-select:none; }
+    .data-table th:first-child{ text-align:center; }
+    .data-table th:hover,.data-table th.sorted{ color:var(--navy); }
+    .data-table tbody tr{ border-bottom:1px solid rgba(26,58,107,0.07); transition:background 0.12s; }
+    .data-table tbody tr:last-child{ border-bottom:none; }
+    .data-table tbody tr:hover{ background:rgba(26,58,107,0.04); }
+    .data-table td{ padding:8px 14px; text-align:center; vertical-align:middle; }
+    .data-table td:first-child{ text-align:center; font-weight:600; }
+    .data-table td.text-col{ text-align:left; font-weight:normal; }
+    .empty-msg{ text-align:center; padding:32px; color:var(--text-muted); font-style:italic; font-size:14px; }
+    .stars{ color:#c8a85a; letter-spacing:1px; font-size:15px; white-space:nowrap; }
+    .stars .empty-star{ color:#d0d4dd; }
+    .na{ color:var(--text-muted); font-style:italic; font-size:12px; }
 
-    /* ── CHURCH CARDS ── */
-    #churches-area { display:flex; flex-direction:column; gap:20px; }
-    .church-card { background:var(--panel); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:box-shadow 0.2s; }
-    .church-card:hover { box-shadow:0 4px 20px rgba(26,58,107,0.1); }
-    .church-card-header { background:rgba(26,58,107,0.06); border-bottom:1px solid var(--border); padding:16px 22px; display:flex; align-items:center; justify-content:space-between; gap:12px; cursor:pointer; user-select:none; transition:background 0.18s; }
-    .church-card-header:hover { background:rgba(26,58,107,0.1); }
-    .ch-left { display:flex; flex-direction:column; gap:5px; }
-    .church-name { font-family:'Cinzel',serif; font-size:15px; font-weight:700; color:var(--navy); }
-    .church-meta { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-    .badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:12px; background:rgba(26,58,107,0.1); color:var(--navy); border:1px solid rgba(26,58,107,0.18); }
-    .badge-gold { background:rgba(200,168,90,0.12); color:#8a6a1a; border-color:rgba(200,168,90,0.3); }
-    .meta-text { font-size:13px; color:var(--text-muted); }
-    .ch-right { display:flex; align-items:center; gap:14px; flex-shrink:0; }
-    .toggle-icon { font-size:16px; color:var(--navy-dim); transition:transform 0.22s; }
-    .church-card.expanded .toggle-icon { transform:rotate(180deg); }
-    .church-card-body { display:none; }
-    .church-card.expanded .church-card-body { display:block; }
+    /* STATES */
+    #state-loading{ display:flex; flex-direction:column; align-items:center; justify-content:center; height:300px; color:var(--text-muted); gap:12px; }
+    .spinner{ width:32px; height:32px; border:2px solid var(--border); border-top-color:var(--navy); border-radius:50%; animation:spin 0.8s linear infinite; }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+    #state-error{ display:none; margin:24px; background:rgba(180,60,60,0.08); border:1px solid rgba(180,60,60,0.2); border-radius:var(--radius); padding:18px 22px; color:#cc3333; font-size:14px; line-height:1.6; white-space:pre-wrap; }
+    #state-data{ display:none; flex:1; }
+    .report-layout{ display:none; }
+    .report-layout.visible{ display:flex; }
 
-    /* Church fields grid */
-    .church-fields { padding:18px 22px; border-bottom:1px solid rgba(26,58,107,0.08); display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px 28px; }
-    .field-item .field-label { font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); font-family:'Cinzel',serif; margin-bottom:3px; }
-    .field-item .field-value { font-size:15px; color:var(--text); }
+    /* FOOTER */
+    footer{ padding:14px 24px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); }
 
-    /* ── LEADER ASSESSMENTS SUB-TABLE ── */
-    .sub-section { padding:18px 22px 22px; }
-    .sub-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
-    .sub-title { font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--navy-dim); }
-    .sub-count { background:var(--navy); color:#fff; border-radius:10px; padding:2px 8px; font-family:'Cinzel',serif; font-size:10px; }
-    .sub-table-wrap { border:1px solid var(--border); border-radius:8px; overflow:hidden; }
-    .sub-table { width:100%; border-collapse:collapse; font-size:14px; }
-    .sub-table thead { background:rgba(26,58,107,0.06); border-bottom:1px solid var(--border); }
-    .sub-table th { font-family:'Cinzel',serif; font-size:9px; letter-spacing:0.18em; color:var(--navy-dim); text-transform:uppercase; padding:10px 14px; text-align:left; white-space:nowrap; cursor:pointer; }
-    .sub-table th:hover { color:var(--navy); }
-    .sub-table tbody tr { border-bottom:1px solid rgba(26,58,107,0.07); transition:background 0.15s; }
-    .sub-table tbody tr:last-child { border-bottom:none; }
-    .sub-table tbody tr:hover { background:rgba(26,58,107,0.04); }
-    .sub-table td { padding:10px 14px; vertical-align:middle; }
-    .no-sub { font-style:italic; color:var(--text-muted); font-size:14px; padding:14px 0; }
-
-    /* ── LEADER LIST TABLE ── */
-    .table-wrap { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-    .main-table { width:100%; border-collapse:collapse; font-size:15px; }
-    .main-table thead { background:rgba(26,58,107,0.07); border-bottom:1px solid var(--border); }
-    .main-table th { font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.18em; color:var(--navy-dim); text-transform:uppercase; padding:14px 18px; text-align:left; white-space:nowrap; cursor:pointer; user-select:none; }
-    .main-table th:hover, .main-table th.sorted { color:var(--navy); }
-    .main-table tbody tr { border-bottom:1px solid rgba(26,58,107,0.09); transition:background 0.15s; }
-    .main-table tbody tr:last-child { border-bottom:none; }
-    .main-table tbody tr:hover { background:rgba(26,58,107,0.04); }
-    .main-table td { padding:13px 18px; vertical-align:middle; }
-    .cell-bold { font-weight:600; }
-    .empty-row td { text-align:center; color:var(--text-muted); padding:60px 20px; font-style:italic; }
-
-    /* SEARCH */
-    .search-wrap { position:relative; flex:1; min-width:200px; max-width:300px; }
-    .search-icon { position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--text-muted); pointer-events:none; }
-    input[type="text"] { width:100%; background:#fff; border:1px solid var(--border); color:var(--text); font-family:'Crimson Pro',serif; font-size:15px; border-radius:8px; padding:10px 16px 10px 40px; outline:none; transition:border-color 0.2s; }
-    input[type="text"]:focus { border-color:var(--navy-dim); }
-
-    /* ── STATES ── */
-    #state-loading { text-align:center; padding:100px 20px; color:var(--text-muted); }
-    .spinner { width:40px; height:40px; border:2px solid var(--border); border-top-color:var(--navy); border-radius:50%; animation:spin 0.85s linear infinite; margin:0 auto 18px; }
-    @keyframes spin { to { transform:rotate(360deg); } }
-    .loading-sub { font-size:13px; margin-top:6px; color:var(--text-muted); }
-
-    #state-error { display:none; background:rgba(180,60,60,0.08); border:1px solid rgba(180,60,60,0.22); border-radius:var(--radius); padding:22px 26px; margin-bottom:24px; color:#cc3333; font-size:15px; line-height:1.7; white-space:pre-wrap; }
-    #state-data { display:none; }
-
-    /* ── FOOTER ── */
-    footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted); flex-wrap:wrap; gap:10px; }
-
-    /* ── DEBUG ── */
-    #debug-toggle { position:fixed; bottom:0; right:16px; z-index:10000; background:var(--navy); color:#fff; border:none; padding:5px 14px; font-size:11px; font-family:monospace; cursor:pointer; border-radius:4px 4px 0 0; font-weight:bold; }
-    #debug-panel { display:none; position:fixed; bottom:0; left:0; right:0; background:#0d1320; border-top:2px solid var(--navy); padding:10px 16px; font-family:monospace; font-size:12px; color:#ccc; max-height:220px; overflow-y:auto; z-index:9999; }
-    #debug-panel.open { display:block; }
+    /* DEBUG */
+    #debug-toggle{ position:fixed; bottom:0; right:16px; z-index:10000; background:var(--navy); color:#fff; border:none; padding:4px 12px; font-size:11px; font-family:monospace; cursor:pointer; border-radius:4px 4px 0 0; }
+    #debug-panel{ display:none; position:fixed; bottom:0; left:0; right:0; background:#0d1320; border-top:2px solid var(--navy); padding:8px 14px; font-family:monospace; font-size:11px; color:#ccc; max-height:200px; overflow-y:auto; z-index:9999; }
+    #debug-panel.open{ display:block; }
     .d-err{color:#ff7070} .d-ok{color:#70ffb0} .d-info{color:#70c5ff} .d-warn{color:#ffd070}
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      nav { padding:0 16px; }
-      .container { padding:0 16px 60px; }
-      .filter-bar { padding:14px 16px; }
-      .church-fields { grid-template-columns:1fr 1fr; }
+    @media(max-width:700px){
+      .left-panel{ width:220px; }
+      .data-table{ font-size:12px; }
     }
   </style>
 </head>
@@ -159,109 +104,95 @@
 <nav>
   <div class="nav-brand">PSWC <span>Church Assessments</span></div>
   <div class="nav-divider"></div>
-  <a href="index.aspx" class="nav-link">Home</a>
-  <a href="Leaders.aspx" class="nav-link">Leaders</a>
-  <a href="church-assessments-report.aspx" class="nav-link">Church Assessments</a>
-  <a href="leader-assessments-report.aspx" class="nav-link">Leader Assessments</a>
+  <a href="https://pswconf.sharepoint.com/sites/ChurchAssessment" class="nav-link">Home</a>
   <a href="AffiliateReport.aspx" class="nav-link active">Affiliate Report</a>
 </nav>
 
-<div class="container">
-  <header>
-    <div>
-      <div class="eyebrow">PSWC · Church Assessments</div>
-      <h1>Affiliate Report <span>Church Assessments &amp; Leader Assessments — Filtered by Affiliate</span></h1>
-    </div>
-    <div class="header-meta">
-      <div id="last-updated">—</div>
-      <div style="margin-top:4px;">Live from SharePoint</div>
-    </div>
-  </header>
+<div class="page-header">
+  <div>
+    <div class="eyebrow">PSWC &middot; Church Assessments</div>
+    <h1>Affiliate Report <span>Church &amp; Leader Assessments filtered by Affiliate</span></h1>
+  </div>
+  <div class="header-meta">
+    <div id="last-updated">-</div>
+    <div style="margin-top:3px;">Live from SharePoint</div>
+  </div>
+</div>
 
-  <div id="state-error"></div>
+<div id="state-error"></div>
 
-  <div id="state-loading">
-    <div class="spinner"></div>
-    <div style="font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.12em;">Loading data…</div>
-    <div class="loading-sub">Connecting to SharePoint · PSWCTEST</div>
+<div id="state-loading">
+  <div class="spinner"></div>
+  <div style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.12em;">Loading data…</div>
+</div>
+
+<div class="report-layout" id="report-layout">
+
+  <!-- LEFT: Affiliates -->
+  <div class="left-panel">
+    <div class="left-panel-header">
+      <div class="panel-title">Affiliates</div>
+      <div class="search-box">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="aff-search" placeholder="Search…" oninput="filterAffList()"/>
+      </div>
+    </div>
+    <div class="affiliate-list" id="affiliate-list"></div>
   </div>
 
-  <div id="state-data">
+  <!-- RIGHT: Tables -->
+  <div class="right-panel" id="right-panel">
 
-    <!-- ── FILTER BAR ── -->
-    <div class="filter-bar">
-      <span class="filter-label">Filter by Affiliate</span>
-      <div class="filter-select-wrap">
-        <select id="affiliate-filter" onchange="applyFilters()">
-          <option value="">All Affiliates</option>
-        </select>
+    <!-- Church Assessment -->
+    <div class="section-block">
+      <div class="section-heading">
+        Church Assessment
+        <span class="count-badge" id="church-count">0</span>
       </div>
-      <div class="filter-info">
-        <span id="result-summary"></span>
-        <button class="btn btn-outline" onclick="loadData()">↻ Refresh</button>
-      </div>
-    </div>
-
-    <!-- ── STATS ── -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-label">Affiliates</div>
-        <div class="stat-value" id="stat-affiliates">—</div>
-        <div class="stat-sub">total affiliates</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Church Assessments</div>
-        <div class="stat-value" id="stat-churches">—</div>
-        <div class="stat-sub">showing / total</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Leaders</div>
-        <div class="stat-value" id="stat-leaders">—</div>
-        <div class="stat-sub">showing / total</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Leader Assessments</div>
-        <div class="stat-value" id="stat-la">—</div>
-        <div class="stat-sub">showing / total</div>
+      <div class="data-table-wrap">
+        <table class="data-table" id="church-table">
+          <thead>
+            <tr>
+              <th onclick="sortTable('church',0)">Financial <span>↕</span></th>
+              <th onclick="sortTable('church',1)">Leaders <span>↕</span></th>
+              <th onclick="sortTable('church',2)">PSWC <span>↕</span></th>
+              <th onclick="sortTable('church',3)">Moral <span>↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="church-tbody"></tbody>
+        </table>
       </div>
     </div>
 
-    <!-- ── CHURCH ASSESSMENTS SECTION ── -->
-    <div class="section-divider">
-      <span class="section-title">Church Assessments</span>
-      <div class="section-line"></div>
-      <span class="section-count" id="church-section-count">0</span>
-    </div>
-    <div id="churches-area"></div>
-
-    <!-- ── LEADER ASSESSMENT LIST SECTION ── -->
-    <div class="section-divider" style="margin-top:52px;">
-      <span class="section-title">Leader Assessment List</span>
-      <div class="section-line"></div>
-      <span class="section-count" id="la-section-count">0</span>
-    </div>
-    <div style="display:flex;gap:14px;align-items:center;margin-bottom:20px;flex-wrap:wrap;">
-      <div class="search-wrap">
-        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="la-search" placeholder="Search assessments…" oninput="applyFilters()"/>
+    <!-- Leader Assessment -->
+    <div class="section-block">
+      <div class="section-heading">
+        Leader Assessment
+        <span class="count-badge" id="la-count">0</span>
       </div>
-      <select id="leader-filter" onchange="applyFilters()" style="max-width:260px;">
-        <option value="">All Leaders</option>
-      </select>
-      <span id="la-count" style="font-size:13px;color:var(--text-muted);margin-left:auto;"></span>
-    </div>
-    <div class="table-wrap">
-      <table class="main-table">
-        <thead><tr id="la-table-header"></tr></thead>
-        <tbody id="la-table-body"></tbody>
-      </table>
+      <div class="data-table-wrap">
+        <table class="data-table" id="la-table">
+          <thead>
+            <tr>
+              <th onclick="sortTable('la',0)">Leader <span>↕</span></th>
+              <th onclick="sortTable('la',1)">Preachteach <span>↕</span></th>
+              <th onclick="sortTable('la',2)">Catalytic <span>↕</span></th>
+              <th onclick="sortTable('la',3)">Coaching Openness <span>↕</span></th>
+              <th onclick="sortTable('la',4)">Evangelism <span>↕</span></th>
+              <th onclick="sortTable('la',5)" class="text-col">Profile 1 <span>↕</span></th>
+              <th onclick="sortTable('la',6)" class="text-col">Profile 2 <span>↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="la-tbody"></tbody>
+        </table>
+      </div>
     </div>
 
-  </div><!-- end state-data -->
-</div><!-- end container -->
+  </div>
+</div>
 
 <footer>
-  <div>© PSWC · Church Assessments Portal</div>
+  <div>© PSWC &middot; Church Assessments Portal</div>
   <div id="footer-user"></div>
 </footer>
 
@@ -270,55 +201,59 @@
 
 <script>
 // ─────────────────────────────────────────────────────────────────────────────
-// CONFIG — update list/field names if they differ on PSWCTEST
+// CONFIG
 // ─────────────────────────────────────────────────────────────────────────────
-const SITE              = 'https://pswconf.sharepoint.com/sites/PSWCTEST';
-const AFFILIATES_LIST   = 'Affiliates';
-const LEADERS_LIST      = 'Leaders';
-const CHURCH_LIST       = 'ChurchAssessments';
-const LA_LIST           = 'LeaderAssessments';
+const SITE            = 'https://pswconf.sharepoint.com/sites/ChurchAssessment';
+const AFFILIATES_LIST = 'Affiliates';
+const LEADERS_LIST    = 'Leaders';
+const CHURCH_LIST     = 'ChurchAssessments';
+const LA_LIST         = 'LeaderAssessments';
 
-// Field linking Leaders → Affiliates (internal name)
-const LEADER_AFF_FIELD  = 'AffiliateID';
-// Field linking ChurchAssessments → Affiliates
-const CHURCH_AFF_FIELD  = 'AffiliateID';
-// Field linking LeaderAssessments → Leaders
-const LA_LEADER_FIELD   = 'LeaderID';
-// Field linking LeaderAssessments → Affiliates (may be derived or direct)
-const LA_AFF_FIELD      = 'AffiliateID';
+// RELATIONSHIPS (all joins on plain text fields — not SP lookup IDs)
+//   ChurchAssessments.AffiliateID  ──►  Affiliates.AffiliateID
+//   LeaderAssessments.AccountID    ──►  Leaders.AccountID
+//   Leaders.AffiliateID            ──►  Affiliates.AffiliateID
 
-// Church Assessment columns shown in expanded card body
-const CHURCH_BODY_FIELDS = [
-  { field: 'Status',         label: 'Status'          },
-  { field: 'Score',          label: 'Score'            },
-  { field: 'MoralScore',     label: 'Moral'            },
-  { field: 'FinancialScore', label: 'Financial'        },
-  { field: 'PSWCScore',      label: 'PSWC'             },
-  { field: 'MissionalFocus', label: 'Missional Focus'  },
-  { field: 'Notes',          label: 'Notes'            },
-  { field: 'AssessedDate',   label: 'Assessed Date'    },
+const AFF_KEY       = 'AffiliateID';  // key on Affiliates
+const CHURCH_AFF    = 'AffiliateID';  // ChurchAssessments → Affiliates
+const LEADER_AFF    = 'AffiliateID';  // Leaders → Affiliates
+const LEADER_ACCT   = 'AccountID';    // key on Leaders
+const LA_ACCT       = 'AccountID';    // LeaderAssessments → Leaders
+
+// Church Assessment score fields
+const CHURCH_FIELDS = [
+  { field:'financial',  label:'Financial' },
+  { field:'leaders',    label:'Leaders'   },
+  { field:'pswc',       label:'PSWC'      },
+  { field:'moral',      label:'Moral'     },
 ];
 
-// Leader Assessment table columns
-const LA_COLS = [
-  { field: 'Title',          label: 'Assessment'  },
-  { field: LA_LEADER_FIELD,  label: 'Leader'      },
-  { field: LA_AFF_FIELD,     label: 'Affiliate'   },
-  { field: 'Score',          label: 'Score'       },
-  { field: 'Status',         label: 'Status'      },
-  { field: 'Date',           label: 'Date'        },
-  { field: 'Notes',          label: 'Notes'       },
+// Leader Assessment score fields
+const LA_FIELDS = [
+  { field:'preachteach',       label:'Preachteach'        },
+  { field:'catalytic',         label:'Catalytic'          },
+  { field:'coaching_openess',  label:'Coaching Openness'  },
+  { field:'evangelism',        label:'Evangelism'         },
+  { field:'Profile1',          label:'Profile 1', text:true },
+  { field:'Profile2',          label:'Profile 2', text:true },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────────────────────────────────────
-let allChurches         = [];
-let allLeaderAssessments= [];
-let allLeaders          = [];
-let affiliateMap        = {};   // id → name
-let leaderMap           = {};   // id → { name, affiliateId }
-let laSort = { col: null, asc: true };
+let allAffiliates    = [];   // raw rows from Affiliates list
+let allChurches      = [];   // raw rows from ChurchAssessments
+let allLeaders       = [];   // raw rows from Leaders
+let allLA            = [];   // raw rows from LeaderAssessments
+
+// Maps keyed by natural-key value (plain string)
+let affMap   = {};   // AffiliateID  → Title (affiliate name)
+let leaderMap= {};   // AccountID    → { name, affiliateId }
+
+let selectedAffId = '';  // currently selected AffiliateID value
+let churchSort = { col:null, asc:true };
+let laSort     = { col:null, asc:true };
+let profileMap = {};  // SP row ID (string) → profile Title
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DEBUG
@@ -328,396 +263,337 @@ function dbg(msg, type='info') {
   const d = document.createElement('div');
   d.className = 'd-' + type;
   d.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
-  p.appendChild(d);
-  p.scrollTop = p.scrollHeight;
+  p.appendChild(d); p.scrollTop = p.scrollHeight;
   console.log('[DBG]', msg);
 }
 function toggleDebug() { document.getElementById('debug-panel').classList.toggle('open'); }
 
+function inspectRecord(label, rec) {
+  if (!rec) return;
+  dbg('── ' + label + ' ──', 'warn');
+  Object.entries(rec).forEach(([k,v]) => {
+    dbg('  ' + k + ' = ' + JSON.stringify(v).slice(0,100));
+  });
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
-// SHAREPOINT REST
+// SHAREPOINT FETCH
 // ─────────────────────────────────────────────────────────────────────────────
 async function spGet(path) {
   const url = SITE + '/_api' + path;
   dbg('GET ' + url);
   const res = await fetch(url, {
     credentials: 'include',
-    headers: {
-      'Accept': 'application/json;odata=nometadata',
-      'X-Requested-With': 'XMLHttpRequest',
-    }
+    headers: { 'Accept':'application/json;odata=nometadata', 'X-Requested-With':'XMLHttpRequest' }
   });
-  dbg('→ ' + res.status + ' ' + res.statusText, res.ok ? 'ok' : 'err');
+  dbg('→ ' + res.status, res.ok ? 'ok' : 'err');
   if (res.status === 401 || res.status === 403) throw new Error('NOT_AUTHENTICATED');
-  if (!res.ok) {
-    const t = await res.text();
-    dbg('Body: ' + t.slice(0, 400), 'err');
-    throw new Error('API ' + res.status + ': ' + res.statusText);
-  }
+  if (!res.ok) { const t = await res.text(); throw new Error('HTTP ' + res.status + ': ' + t.slice(0,150)); }
   return res.json();
+}
+
+// Read a field value — handles plain string/number or SP lookup object
+function fv(item, field) {
+  const v = item[field];
+  if (v === undefined || v === null || v === '') return '';
+  if (typeof v === 'object') return String(v.ID ?? v.Value ?? v.Title ?? '');
+  return String(v).trim();
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // LOAD
 // ─────────────────────────────────────────────────────────────────────────────
 async function loadData() {
-  showState('loading');
-  hideError();
+  document.getElementById('state-loading').style.display = 'flex';
+  document.getElementById('report-layout').classList.remove('visible');
+  document.getElementById('state-error').style.display = 'none';
 
   try {
     // Current user
     try {
       const me = await spGet('/web/currentuser?$select=Title,Email');
       document.getElementById('footer-user').textContent = 'Signed in as ' + (me.Title || me.Email || '');
-      dbg('User: ' + (me.Title || me.Email), 'ok');
-    } catch(e) { dbg('User fetch failed: ' + e.message, 'warn'); }
+    } catch(e) { dbg('User: ' + e.message, 'warn'); }
 
-    // Affiliates
-    try {
-      const d = await spGet(`/web/lists/getbytitle('${AFFILIATES_LIST}')/items?$select=ID,Title&$top=5000&$orderby=Title`);
-      affiliateMap = {};
-      (d.value || []).forEach(a => { affiliateMap[a.ID] = a.Title; });
-      dbg('Affiliates loaded: ' + (d.value || []).length, 'ok');
-    } catch(e) {
-      dbg('Affiliates failed: ' + e.message, 'warn');
+    // ── Affiliates ────────────────────────────────────────────────────────
+    {
+      const d = await spGet(`/web/lists/getbytitle('${AFFILIATES_LIST}')/items?$top=1`);
+      if (d.value?.[0]) inspectRecord('AFFILIATES sample', d.value[0]);
     }
-
-    // Leaders
-    try {
-      const d = await spGet(`/web/lists/getbytitle('${LEADERS_LIST}')/items?$select=ID,Title,${LEADER_AFF_FIELD}&$top=5000&$orderby=Title`);
-      leaderMap = {};
-      (d.value || []).forEach(l => {
-        leaderMap[l.ID] = { name: l.Title, affiliateId: l[LEADER_AFF_FIELD] };
+    {
+      const d = await spGet(`/web/lists/getbytitle('${AFFILIATES_LIST}')/items?$top=5000&$orderby=Title`);
+      allAffiliates = d.value || [];
+      affMap = {};
+      allAffiliates.forEach(a => {
+        const key = fv(a, AFF_KEY) || String(a.ID);
+        affMap[key] = a.Title;
+        // Also index by SP row ID as fallback
+        affMap[String(a.ID)] = affMap[String(a.ID)] || a.Title;
       });
+      dbg('Affiliates: ' + allAffiliates.length + ' loaded', 'ok');
+    }
+
+    // ── Leaders ───────────────────────────────────────────────────────────
+    {
+      const d = await spGet(`/web/lists/getbytitle('${LEADERS_LIST}')/items?$top=1`);
+      if (d.value?.[0]) inspectRecord('LEADERS sample', d.value[0]);
+    }
+    {
+      const d = await spGet(`/web/lists/getbytitle('${LEADERS_LIST}')/items?$top=5000&$orderby=Title`);
       allLeaders = d.value || [];
-      dbg('Leaders loaded: ' + allLeaders.length, 'ok');
-    } catch(e) {
-      dbg('Leaders failed: ' + e.message, 'warn');
+      leaderMap = {};
+      allLeaders.forEach(l => {
+        const acctKey = fv(l, LEADER_ACCT) || String(l.ID);
+        const affId   = fv(l, LEADER_AFF);
+        leaderMap[acctKey] = { name: l.Title, affiliateId: affId };
+        leaderMap[String(l.ID)] = leaderMap[String(l.ID)] || { name: l.Title, affiliateId: affId };
+      });
+      dbg('Leaders: ' + allLeaders.length + ' loaded', 'ok');
     }
 
-    // Church Assessments
-    const churchFields = [...new Set([
-      'ID', 'Title', CHURCH_AFF_FIELD,
-      ...CHURCH_BODY_FIELDS.map(f => f.field)
-    ])].join(',');
-    try {
-      const d = await spGet(`/web/lists/getbytitle('${CHURCH_LIST}')/items?$select=${churchFields}&$top=5000&$orderby=Title`);
+    // ── Church Assessments ────────────────────────────────────────────────
+    {
+      const d = await spGet(`/web/lists/getbytitle('${CHURCH_LIST}')/items?$top=1`);
+      if (d.value?.[0]) inspectRecord('CHURCH_ASSESSMENTS sample', d.value[0]);
+    }
+    {
+      const d = await spGet(`/web/lists/getbytitle('${CHURCH_LIST}')/items?$top=5000&$orderby=Title`);
       allChurches = d.value || [];
-      dbg('Church Assessments loaded: ' + allChurches.length, 'ok');
-    } catch(e) {
-      dbg('ChurchAssessments failed: ' + e.message, 'warn');
-      allChurches = [];
+      dbg('ChurchAssessments: ' + allChurches.length + ' loaded', 'ok');
     }
 
-    // Leader Assessments
-    const laFields = [...new Set([
-      'ID', ...LA_COLS.map(c => c.field), 'ChurchAssessmentID'
-    ])].join(',');
+    // ── PastorProfiles (lookup table) ─────────────────────────────────────────
     try {
-      const d = await spGet(`/web/lists/getbytitle('${LA_LIST}')/items?$select=${laFields}&$top=5000&$orderby=Title`);
-      allLeaderAssessments = d.value || [];
-      dbg('Leader Assessments loaded: ' + allLeaderAssessments.length, 'ok');
-    } catch(e) {
-      dbg('LeaderAssessments failed: ' + e.message, 'warn');
-      allLeaderAssessments = [];
+      const d = await spGet(`/web/lists/getbytitle('PastorProfiles')/items?$select=ID,Title&$top=500`);
+      profileMap = {};
+      (d.value || []).forEach(p => { profileMap[String(p.ID)] = p.Title; });
+      dbg('PastorProfiles: ' + (d.value || []).length + ' loaded', 'ok');
+    } catch(e) { dbg('PastorProfiles load skipped: ' + e.message, 'warn'); }
+
+    // ── Leader Assessments ────────────────────────────────────────────────
+    {
+      const d = await spGet(`/web/lists/getbytitle('${LA_LIST}')/items?$top=1`);
+      if (d.value?.[0]) inspectRecord('LEADER_ASSESSMENTS sample', d.value[0]);
+    }
+    {
+      const d = await spGet(`/web/lists/getbytitle('${LA_LIST}')/items?$top=5000&$orderby=Title`);
+      allLA = d.value || [];
+      dbg('LeaderAssessments: ' + allLA.length + ' loaded', 'ok');
     }
 
-    // Build UI
-    buildAffiliateFilter();
-    buildLeaderFilter();
-    buildLAHeader();
-    applyFilters();
-
-    document.getElementById('stat-affiliates').textContent = Object.keys(affiliateMap).length || '—';
     document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
-    showState('data');
+    document.getElementById('state-loading').style.display = 'none';
+    document.getElementById('report-layout').classList.add('visible');
+
+    buildAffList();
+    renderTables();
 
   } catch(e) {
-    dbg('loadData error: ' + e.message, 'err');
-    showState('error');
+    dbg('ERROR: ' + e.message, 'err');
+    document.getElementById('state-loading').style.display = 'none';
+    const el = document.getElementById('state-error');
+    el.style.display = 'block';
     if (e.message === 'NOT_AUTHENTICATED') {
-      showError(
-        '⚠ Not authenticated.\n\n' +
-        'This file must be opened directly from SharePoint — not from a local path.\n\n' +
-        'Steps:\n' +
-        '1. Upload AffiliateReport.aspx to your SharePoint Documents library\n' +
-        '2. Navigate to the file within SharePoint\n' +
-        '3. Open it — your SharePoint session will authenticate automatically.'
-      );
+      el.textContent = '⚠ Not authenticated.\n\nOpen this file directly from SharePoint — not locally.';
     } else {
-      showError(
-        '⚠ Failed to load: ' + e.message + '\n\n' +
-        'Click 🔧 Debug for details.\n\n' +
-        'Common fixes:\n' +
-        '• List names must match exactly (case-sensitive):\n' +
-        '  Affiliates · Leaders · ChurchAssessments · LeaderAssessments\n' +
-        '• Field internal names: AffiliateID · LeaderID (update CONFIG at top of script)\n' +
-        '• File must be hosted on SharePoint, not opened locally'
-      );
+      el.textContent = '⚠ Failed to load: ' + e.message + '\n\nSee 🔧 Debug panel for details.';
     }
   }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// FILTERS
+// AFFILIATES LIST (left panel)
 // ─────────────────────────────────────────────────────────────────────────────
-function buildAffiliateFilter() {
-  const sel = document.getElementById('affiliate-filter');
-  sel.innerHTML = '<option value="">All Affiliates</option>';
-  Object.entries(affiliateMap)
-    .sort((a, b) => a[1].localeCompare(b[1]))
-    .forEach(([id, name]) => {
-      const o = document.createElement('option');
-      o.value = id;
-      o.textContent = name;
-      sel.appendChild(o);
+function buildAffList() {
+  const container = document.getElementById('affiliate-list');
+  container.innerHTML = '';
+
+  // "All" option
+  const all = document.createElement('div');
+  all.className = 'affiliate-item' + (selectedAffId === '' ? ' selected' : '');
+  all.textContent = 'All Affiliates';
+  all.onclick = () => selectAffiliate('');
+  container.appendChild(all);
+
+  const query = document.getElementById('aff-search').value.trim().toLowerCase();
+
+  allAffiliates
+    .filter(a => !query || (a.Title || '').toLowerCase().includes(query))
+    .forEach(a => {
+      const affId = fv(a, AFF_KEY) || String(a.ID);
+      const item = document.createElement('div');
+      item.className = 'affiliate-item' + (selectedAffId === affId ? ' selected' : '');
+      item.textContent = a.Title || affId;
+      item.onclick = () => selectAffiliate(affId);
+      container.appendChild(item);
     });
 }
 
-function buildLeaderFilter() {
-  const sel = document.getElementById('leader-filter');
-  sel.innerHTML = '<option value="">All Leaders</option>';
-  allLeaders
-    .sort((a, b) => (a.Title || '').localeCompare(b.Title || ''))
-    .forEach(l => {
-      const o = document.createElement('option');
-      o.value = l.ID;
-      o.textContent = l.Title || ('Leader ' + l.ID);
-      sel.appendChild(o);
-    });
+function filterAffList() { buildAffList(); }
+
+function selectAffiliate(affId) {
+  selectedAffId = affId;
+  buildAffList();
+  renderTables();
 }
 
-function applyFilters() {
-  const affId    = document.getElementById('affiliate-filter').value;
-  const leaderId = document.getElementById('leader-filter').value;
-  const laSearch = document.getElementById('la-search').value.trim().toLowerCase();
-
-  // Filter Church Assessments
-  const filteredChurches = allChurches.filter(c =>
-    !affId || String(c[CHURCH_AFF_FIELD] || '') === affId
-  );
-
-  // Filter Leader Assessments by affiliate and optional leader/search
-  const filteredLA = allLeaderAssessments.filter(la => {
-    // Resolve affiliate of this assessment
-    let laAffId = la[LA_AFF_FIELD];
-    if (!laAffId && la[LA_LEADER_FIELD]) {
-      const ldr = leaderMap[la[LA_LEADER_FIELD]];
-      if (ldr) laAffId = ldr.affiliateId;
-    }
-    const matchAff    = !affId    || String(laAffId || '') === affId;
-    const matchLeader = !leaderId || String(la[LA_LEADER_FIELD] || '') === leaderId;
-    const laName      = (la.Title || '').toLowerCase();
-    const leaderName  = (leaderMap[la[LA_LEADER_FIELD]]?.name || '').toLowerCase();
-    const matchSearch = !laSearch || laName.includes(laSearch) || leaderName.includes(laSearch);
-    return matchAff && matchLeader && matchSearch;
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDER TABLES
+// ─────────────────────────────────────────────────────────────────────────────
+function renderTables() {
+  // ── Filter Church Assessments by AffiliateID ──────────────────────────────
+  let churches = allChurches.filter(c => {
+    if (!selectedAffId) return true;
+    return fv(c, CHURCH_AFF) === selectedAffId;
   });
 
-  // Filter leaders for stat counting
-  const filteredLeaderIds = new Set(filteredLA.map(la => la[LA_LEADER_FIELD]).filter(Boolean));
+  // ── Filter Leader Assessments via: LA.AccountID → Leader.AccountID → Leader.AffiliateID ──
+  let las = allLA.filter(la => {
+    if (!selectedAffId) return true;
+    const acctKey = fv(la, LA_ACCT);
+    const ldr     = leaderMap[acctKey];
+    if (!ldr) return false;
+    return ldr.affiliateId === selectedAffId;
+  });
 
-  // Update stats
-  document.getElementById('stat-churches').textContent  = filteredChurches.length + ' / ' + allChurches.length;
-  document.getElementById('stat-leaders').textContent   = filteredLeaderIds.size + ' / ' + allLeaders.length;
-  document.getElementById('stat-la').textContent        = filteredLA.length + ' / ' + allLeaderAssessments.length;
-  document.getElementById('church-section-count').textContent = filteredChurches.length + ' church' + (filteredChurches.length !== 1 ? 'es' : '');
-  document.getElementById('la-section-count').textContent     = filteredLA.length + ' assessment' + (filteredLA.length !== 1 ? 's' : '');
-  document.getElementById('result-summary').textContent  =
-    affId ? (affiliateMap[affId] || 'Affiliate ' + affId) : 'All Affiliates';
-  document.getElementById('la-count').textContent = filteredLA.length + ' of ' + allLeaderAssessments.length + ' assessments';
+  // Apply sorts
+  if (churchSort.col !== null) churches = sortRows(churches, churchSort, churchRowValues);
+  if (laSort.col !== null)     las      = sortRows(las, laSort, laRowValues);
 
-  renderChurches(filteredChurches);
-  renderLATable(filteredLA);
+  // Update counts
+  document.getElementById('church-count').textContent = churches.length;
+  document.getElementById('la-count').textContent     = las.length;
+
+  renderChurchTable(churches);
+  renderLATable(las);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// CHURCH CARDS
-// ─────────────────────────────────────────────────────────────────────────────
-function renderChurches(churches) {
-  const area = document.getElementById('churches-area');
-  area.innerHTML = '';
+function churchRowValues(c) {
+  return [
+    fv(c, 'financial'),
+    fv(c, 'leaders'),
+    fv(c, 'pswc'),
+    fv(c, 'moral'),
+  ];
+}
 
-  if (!churches.length) {
-    area.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-style:italic;">No church assessments match the selected affiliate.</div>';
-    return;
+function laRowValues(la) {
+  const acctKey = fv(la, LA_ACCT);
+  const ldr     = leaderMap[acctKey];
+  return [
+    ldr ? ldr.name : (la.Title || acctKey || ''),
+    fv(la, 'preachteach'),
+    fv(la, 'catalytic'),
+    fv(la, 'coaching_openess'),
+    fv(la, 'evangelism'),
+    lookupTitle(la, 'Profile1'),
+    lookupTitle(la, 'Profile2'),
+  ];
+}
+
+// Resolve a numeric ID field to its PastorProfiles Title via profileMap.
+// Tries the exact field name first, then common SP internal name variants.
+// Logs all field keys on the first call to help diagnose wrong field names.
+let _profileFieldsLogged = false;
+function lookupTitle(item, field) {
+  // On first call, log every key in the item so we can see real field names
+  if (!_profileFieldsLogged) {
+    _profileFieldsLogged = true;
+    dbg('LA item keys: ' + Object.keys(item).join(', '), 'warn');
   }
 
-  churches.forEach(church => {
-    const affName = affiliateMap[church[CHURCH_AFF_FIELD]] || church[CHURCH_AFF_FIELD] || '—';
+  // Try the exact field name, then common SP suffix variants
+  const candidates = [
+    field,
+    field + 'Id',          // SP lookup ID suffix
+    field + '0',           // SP sometimes appends 0 on conflict
+    field.replace(/(\d+)$/, (m, n) => String(Number(n))), // normalise number
+  ];
 
-    // Linked leader assessments
-    const linked = allLeaderAssessments.filter(la => {
-      let laAffId = la[LA_AFF_FIELD];
-      if (!laAffId && la[LA_LEADER_FIELD]) {
-        const ldr = leaderMap[la[LA_LEADER_FIELD]];
-        if (ldr) laAffId = ldr.affiliateId;
-      }
-      return la.ChurchAssessmentID === church.ID || laAffId === church[CHURCH_AFF_FIELD];
-    });
+  let raw = null;
+  for (const key of candidates) {
+    const v = item[key];
+    if (v !== null && v !== undefined && v !== '') { raw = v; break; }
+  }
 
-    const card = document.createElement('div');
-    card.className = 'church-card';
+  if (raw === null || raw === undefined || raw === '') return '';
+  // If it's an object (lookup), extract ID or Title directly
+  if (typeof raw === 'object') {
+    const title = raw.Title || raw.Value;
+    if (title) return title;
+    raw = raw.ID ?? raw.Id ?? raw;
+  }
+  const id = String(raw).trim();
+  if (!id || id === '0') return '';
+  return profileMap[id] || id;
+}
 
-    // Header
-    const hdr = document.createElement('div');
-    hdr.className = 'church-card-header';
-    hdr.innerHTML = `
-      <div class="ch-left">
-        <div class="church-name">${esc(church.Title || 'Unnamed Church')}</div>
-        <div class="church-meta">
-          <span class="badge">${esc(affName)}</span>
-          ${church.Status ? `<span class="badge badge-gold">${esc(church.Status)}</span>` : ''}
-          ${church.Score !== undefined && church.Score !== null ? `<span class="meta-text">Score: <strong>${esc(String(church.Score))}</strong></span>` : ''}
-        </div>
-      </div>
-      <div class="ch-right">
-        <span style="font-size:12px;color:var(--text-muted);">${linked.length} leader assessment${linked.length !== 1 ? 's' : ''}</span>
-        <span class="toggle-icon">▼</span>
-      </div>`;
-    hdr.onclick = () => card.classList.toggle('expanded');
-
-    // Body
-    const body = document.createElement('div');
-    body.className = 'church-card-body';
-
-    // Field grid
-    const showFields = CHURCH_BODY_FIELDS.filter(f => f.field !== 'Title' && f.field !== CHURCH_AFF_FIELD);
-    const hasFields  = showFields.some(f => church[f.field] !== undefined && church[f.field] !== null && church[f.field] !== '');
-    if (hasFields) {
-      const fg = document.createElement('div');
-      fg.className = 'church-fields';
-      showFields.forEach(f => {
-        const val = church[f.field];
-        if (val === undefined || val === null || val === '') return;
-        fg.innerHTML += `<div class="field-item"><div class="field-label">${esc(f.label)}</div><div class="field-value">${esc(String(val))}</div></div>`;
-      });
-      body.appendChild(fg);
-    }
-
-    // Leader assessments sub-table
-    const sub = document.createElement('div');
-    sub.className = 'sub-section';
-    sub.innerHTML = `<div class="sub-header"><span class="sub-title">Leader Assessments</span><span class="sub-count">${linked.length}</span></div>`;
-
-    if (!linked.length) {
-      sub.innerHTML += '<div class="no-sub">No leader assessments linked to this church assessment.</div>';
-    } else {
-      const tw = document.createElement('div');
-      tw.className = 'sub-table-wrap';
-      const tbl = document.createElement('table');
-      tbl.className = 'sub-table';
-
-      // sub thead
-      const thead = document.createElement('thead');
-      const hrow  = document.createElement('tr');
-      LA_COLS.forEach(col => {
-        const th = document.createElement('th');
-        th.textContent = col.label;
-        hrow.appendChild(th);
-      });
-      thead.appendChild(hrow);
-      tbl.appendChild(thead);
-
-      // sub tbody
-      const tbody = document.createElement('tbody');
-      linked.forEach(la => {
-        const tr = document.createElement('tr');
-        LA_COLS.forEach(col => {
-          const td = document.createElement('td');
-          td.textContent = resolveLAVal(la, col);
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      });
-      tbl.appendChild(tbody);
-      tw.appendChild(tbl);
-      sub.appendChild(tw);
-    }
-
-    body.appendChild(sub);
-    card.appendChild(hdr);
-    card.appendChild(body);
-    area.appendChild(card);
+function sortRows(rows, sortState, valFn) {
+  return [...rows].sort((a, b) => {
+    const va = valFn(a)[sortState.col];
+    const vb = valFn(b)[sortState.col];
+    const na = parseFloat(va), nb = parseFloat(vb);
+    const numCompare = !isNaN(na) && !isNaN(nb) ? na - nb : String(va).localeCompare(String(vb));
+    return sortState.asc ? numCompare : -numCompare;
   });
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// LEADER ASSESSMENT TABLE
+// STAR RATING HELPER
+// Converts a numeric score (1-5 scale) to filled/empty stars.
+// Value of -1 or blank = N/A
 // ─────────────────────────────────────────────────────────────────────────────
-function buildLAHeader() {
-  const tr = document.getElementById('la-table-header');
-  tr.innerHTML = '';
-  LA_COLS.forEach((col, i) => {
-    const th = document.createElement('th');
-    th.innerHTML = col.label + ' <span style="opacity:0.5">↕</span>';
-    th.onclick = () => sortLABy(i);
-    tr.appendChild(th);
-  });
+function stars(val) {
+  if (val === '' || val === null || val === undefined) return '';
+  const num = parseFloat(val);
+  if (isNaN(num)) return val; // return text as-is (e.g. Profile1/Profile2)
+  if (num === -1) return '<span class="na">N/A</span>';
+  const filled = Math.round(Math.min(Math.max(num, 0), 5));
+  const empty  = 5 - filled;
+  return '<span class="stars">'
+    + '&#9733;'.repeat(filled)
+    + '<span class="empty-star">' + '&#9733;'.repeat(empty) + '</span>'
+    + '</span>';
 }
 
-function sortLABy(i) {
-  laSort.asc = laSort.col === i ? !laSort.asc : true;
-  laSort.col = i;
-  document.querySelectorAll('#la-table-header th').forEach((th, idx) => {
-    th.classList.toggle('sorted', idx === i);
-    const sp = th.querySelector('span');
-    if (sp) sp.textContent = idx === i ? (laSort.asc ? ' ↑' : ' ↓') : ' ↕';
-  });
-  applyFilters();
-}
-
-function resolveLAVal(la, col) {
-  if (col.field === LA_LEADER_FIELD) {
-    const l = leaderMap[la[col.field]];
-    return l ? l.name : (la[col.field] || '—');
-  }
-  if (col.field === LA_AFF_FIELD) {
-    let affId = la[col.field];
-    if (!affId && la[LA_LEADER_FIELD]) {
-      const l = leaderMap[la[LA_LEADER_FIELD]];
-      if (l) affId = l.affiliateId;
-    }
-    return affiliateMap[affId] || affId || '—';
-  }
-  const v = la[col.field];
-  return (v === undefined || v === null || v === '') ? '—' : String(v);
-}
-
-function renderLATable(rows) {
-  // Apply sort
-  if (laSort.col !== null) {
-    const col = LA_COLS[laSort.col];
-    rows = [...rows].sort((a, b) => {
-      const va = resolveLAVal(a, col).toLowerCase();
-      const vb = resolveLAVal(b, col).toLowerCase();
-      return laSort.asc ? va.localeCompare(vb) : vb.localeCompare(va);
-    });
-  }
-
-  const tb = document.getElementById('la-table-body');
+function renderChurchTable(churches) {
+  const tb = document.getElementById('church-tbody');
   tb.innerHTML = '';
-
-  if (!rows.length) {
-    const tr = document.createElement('tr');
-    tr.className = 'empty-row';
-    tr.innerHTML = `<td colspan="${LA_COLS.length}">No leader assessments match your filters.</td>`;
-    tb.appendChild(tr);
+  if (!churches.length) {
+    tb.innerHTML = `<tr><td colspan="4" class="empty-msg">No church assessments for this affiliate.</td></tr>`;
     return;
   }
-
-  rows.forEach(la => {
+  churches.forEach(c => {
     const tr = document.createElement('tr');
-    LA_COLS.forEach((col, i) => {
+    const vals = churchRowValues(c);
+    vals.forEach((v, i) => {
       const td = document.createElement('td');
-      const val = resolveLAVal(la, col);
-      if (i === 0) {
-        td.innerHTML = `<span class="cell-bold">${esc(val)}</span>`;
-      } else if (col.field === LA_LEADER_FIELD || col.field === LA_AFF_FIELD) {
-        td.innerHTML = val !== '—'
-          ? `<span class="badge">${esc(val)}</span>`
-          : `<span style="color:var(--text-muted)">—</span>`;
+      td.style.textAlign = 'center';
+      td.innerHTML = stars(v);
+      tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+}
+
+function renderLATable(las) {
+  const tb = document.getElementById('la-tbody');
+  tb.innerHTML = '';
+  if (!las.length) {
+    tb.innerHTML = `<tr><td colspan="7" class="empty-msg">No leader assessments for this affiliate.</td></tr>`;
+    return;
+  }
+  las.forEach(la => {
+    const tr = document.createElement('tr');
+    const vals = laRowValues(la);
+    vals.forEach((v, i) => {
+      const td = document.createElement('td');
+      td.style.textAlign = 'center';
+      // Leader name (col 0) and Profile cols (5,6) are text — no stars
+      if (i === 0 || i >= 5) {
+        td.textContent = v !== undefined && v !== null && v !== '' ? v : '';
       } else {
-        td.textContent = val;
+        td.innerHTML = stars(v);
       }
       tr.appendChild(td);
     });
@@ -726,26 +602,34 @@ function renderLATable(rows) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SORTING
+// ─────────────────────────────────────────────────────────────────────────────
+function sortTable(which, col) {
+  const state = which === 'church' ? churchSort : laSort;
+  state.asc = state.col === col ? !state.asc : true;
+  state.col = col;
+
+  // Update header indicators
+  const tbl = document.getElementById(which === 'church' ? 'church-table' : 'la-table');
+  tbl.querySelectorAll('th').forEach((th, i) => {
+    th.classList.toggle('sorted', i === col);
+    const sp = th.querySelector('span');
+    if (sp) sp.textContent = i === col ? (state.asc ? '↑' : '↓') : '↕';
+  });
+  renderTables();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // UTILS
 // ─────────────────────────────────────────────────────────────────────────────
-function showState(s) {
-  document.getElementById('state-loading').style.display = s === 'loading' ? 'block' : 'none';
-  document.getElementById('state-data').style.display    = s === 'data'    ? 'block' : 'none';
-}
-function showError(m) { const e = document.getElementById('state-error'); e.style.display = 'block'; e.textContent = m; }
-function hideError()  { document.getElementById('state-error').style.display = 'none'; }
 function esc(s) {
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────────────────────────────────────
-dbg('AffiliateReport loaded from: ' + window.location.href);
+dbg('AffiliateReport loaded');
 loadData();
 </script>
 </body>
