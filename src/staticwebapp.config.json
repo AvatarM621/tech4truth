@@ -1,0 +1,21 @@
+{
+  "routes": [
+    { "route": "/NewIndex.html",  "redirect": "/", "statusCode": 301 },
+    { "route": "/Dashboard.html", "redirect": "/", "statusCode": 301 },
+    { "route": "/index.html",     "redirect": "/", "statusCode": 301 }
+  ],
+  "responseOverrides": {
+    "404": { "rewrite": "/index.html", "statusCode": 404 }
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+  },
+  "mimeTypes": {
+    ".svg": "image/svg+xml",
+    ".webp": "image/webp"
+  }
+}
