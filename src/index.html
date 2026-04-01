@@ -3,211 +3,471 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tech 4 Truth — Fractional CTO, Microsoft 365, RAMP Expense, and Process Automation services for churches and nonprofits. Mission-first technology consulting in Newport, TN.">
+  <meta name="description" content="Tech 4 Truth — Mission-first technology consulting for churches and nonprofits. Fractional CTO, Microsoft 365, RAMP Expense System, and Process Automation. Newport, TN.">
   <meta name="keywords" content="nonprofit technology, church technology, Microsoft 365 nonprofit, RAMP expense system, fractional CTO, process automation, NGO tech consulting">
-  <meta property="og:title" content="Tech 4 Truth — Mission-First Technology for Nonprofits &amp; Churches">
-  <meta property="og:description" content="Strategic technology consulting for churches and nonprofits. Microsoft 365, RAMP, Process Automation, and Fractional CTO services.">
-  <meta property="og:image" content="t4tlogo.png">
+  <meta property="og:title" content="Tech 4 Truth — Technology That Serves Mission">
+  <meta property="og:description" content="Mission-first technology for churches and nonprofits. Microsoft 365, RAMP, process automation, fractional CTO.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tech4truth.org">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" type="image/png" href="t4tlogo.png">
-  <title>Tech 4 Truth — Technology Consulting for Nonprofits &amp; Churches</title>
+  <link rel="icon" type="image/svg+xml" href="tech4truth-logo-updated.svg">
+  <title>Tech 4 Truth — Technology That Serves Mission</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+<a class="skip-link" href="#main">Skip to main content</a>
 
-  <header class="site-header" role="banner">
-    <div class="header__inner">
-      <a href="index.html" class="header__brand" aria-label="Tech 4 Truth — Home">
-        <img src="t4tlogo.png" alt="Tech 4 Truth logo" class="header__logo-img" width="44" height="44">
-        <span class="header__wordmark">Tech<span class="accent"> 4 </span>Truth</span>
-      </a>
-      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav">
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-      </button>
-      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
-        <ul role="list">
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="https://forms.office.com/r/rHgca4dkD3?origin=lprLink" target="_blank" rel="noopener noreferrer">Organization Registration</a></li>
-          <li><a href="https://apps.powerapps.com/play/e/14afab6a-be82-e32d-99c5-dfa75c329913/a/c020da64-d55d-436f-af72-918d4e600dee?tenantId=33cf58fe-e4bc-4098-992d-7e709dc91fcb&hint=8552fa02-c4b6-40a8-b7fd-8716d0ffaae9&sourcetime=1739842935840&hidenavbar=true#" target="_blank" rel="noopener noreferrer">File Uploads</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-          <li><a href="https://outlook.office.com/bookwithme/me/meetingtype/new?title=1:1%20meetings&duration=30%20mins" target="_blank" rel="noopener noreferrer" class="nav__cta">Book Free Assessment</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NAV
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<header class="nav" role="banner">
+  <div class="nav-inner">
 
-  <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero__inner">
-      <div class="hero__eyebrow">Nonprofit &amp; Church Technology</div>
-      <h1 id="hero-heading" class="hero__heading">
-        Mission&#8209;First<br>
-        <em>Technology</em>
-      </h1>
-      <p class="hero__subhead">
-        We put your ministry before the technology — strategic roadmaps, Microsoft&thinsp;365, RAMP, and process automation, priced for mission sustainability.
-      </p>
-      <div class="hero__actions">
-        <a href="https://outlook.office.com/bookwithme/me/meetingtype/new?title=1:1%20meetings&duration=30%20mins" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Book a Free Assessment</a>
-        <a href="#services" class="btn btn--ghost">Our Services</a>
+    <a href="index.html" class="nav-brand" aria-label="Tech 4 Truth — Home">
+      <!-- Logo mark: signal arcs + circle + checkmark, adapted for navy background -->
+      <svg class="nav-logomark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="48" height="48" rx="12" fill="#1E3A8A"/>
+        <!-- Outer signal arcs -->
+        <path stroke="rgba(255,255,255,.22)" stroke-width="1.5" stroke-linecap="round" fill="none" d="M9,24 A20,20 0 0,1 30,4"/>
+        <path stroke="rgba(255,255,255,.22)" stroke-width="1.5" stroke-linecap="round" fill="none" d="M9,24 A20,20 0 0,0 30,44"/>
+        <!-- Mid signal arcs -->
+        <path stroke="rgba(255,255,255,.5)" stroke-width="1.5" stroke-linecap="round" fill="none" d="M13,24 A16,16 0 0,1 29,8"/>
+        <path stroke="rgba(255,255,255,.5)" stroke-width="1.5" stroke-linecap="round" fill="none" d="M13,24 A16,16 0 0,0 29,40"/>
+        <!-- Main circle -->
+        <circle cx="24" cy="24" r="11" stroke="#fff" stroke-width="2"/>
+        <!-- Checkmark -->
+        <path stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M17.5,24.5 L22,29 L30.5,18"/>
+      </svg>
+      <span class="nav-wordmark">Tech<span>4</span>Truth</span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="primary-nav" class="nav-links" aria-label="Primary navigation">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="https://forms.office.com/r/rHgca4dkD3?origin=lprLink" target="_blank" rel="noopener noreferrer">Organization Registration</a>
+      <a href="https://apps.powerapps.com/play/e/14afab6a-be82-e32d-99c5-dfa75c329913/a/c020da64-d55d-436f-af72-918d4e600dee?tenantId=33cf58fe-e4bc-4098-992d-7e709dc91fcb&hint=8552fa02-c4b6-40a8-b7fd-8716d0ffaae9&sourcetime=1739842935840&hidenavbar=true#" target="_blank" rel="noopener noreferrer">File Uploads</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="https://outlook.office.com/bookwithme/me/meetingtype/new?title=1:1%20meetings&duration=30%20mins" target="_blank" rel="noopener noreferrer" class="nav-cta">Book Assessment</a>
+    </nav>
+
+  </div>
+</header>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     HERO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="hero-inner">
+    <div class="hero-content">
+
+      <div class="hero-chip">
+        <span class="hero-chip-dot" aria-hidden="true"></span>
+        Nonprofit &amp; Church Technology
       </div>
-      <p class="hero__note">We're a nonprofit serving nonprofits. All services priced with mission sustainability in mind.</p>
+
+      <h1 id="hero-h1" class="hero-h1">
+        Technology That<br>
+        Serves <em>Mission.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Microsoft 365, RAMP expense systems, process automation, and fractional CTO services — built for churches and NGOs at mission-sustainable pricing.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://outlook.office.com/bookwithme/me/meetingtype/new?title=1:1%20meetings&duration=30%20mins"
+           target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Book a Free Assessment
+        </a>
+        <a href="#services" class="btn btn-ghost">View Services</a>
+      </div>
+
+      <ul class="trust-row" role="list">
+        <li class="trust-item">
+          <span class="trust-check" aria-hidden="true"></span>No surprise fees
+        </li>
+        <li class="trust-item">
+          <span class="trust-check" aria-hidden="true"></span>30-day guarantee
+        </li>
+        <li class="trust-item">
+          <span class="trust-check" aria-hidden="true"></span>Nonprofit pricing
+        </li>
+        <li class="trust-item">
+          <span class="trust-check" aria-hidden="true"></span>Free tech assessment
+        </li>
+      </ul>
+
     </div>
-    <div class="hero__graphic" aria-hidden="true">
-      <div class="hero__orb hero__orb--1"></div>
-      <div class="hero__orb hero__orb--2"></div>
-      <div class="hero__cross"></div>
+
+    <div class="hero-stats" aria-label="Key results">
+      <div class="stat-card">
+        <div class="stat-val">12<span>hrs</span></div>
+        <div class="stat-label">saved per week<br>avg client</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">4<span>wks</span></div>
+        <div class="stat-label">avg RAMP<br>implementation</div>
+      </div>
+      <div class="stat-card stat-card-navy">
+        <div class="stat-val">$0</div>
+        <div class="stat-label">M365 licenses<br>for nonprofits</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">30<span>day</span></div>
+        <div class="stat-label">success<br>guarantee</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     MAIN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<main id="main">
+
+  <!-- WHY CHOOSE US -->
+  <section class="section section-tinted" aria-labelledby="why-h2">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-label">Why Tech 4 Truth</p>
+        <h2 id="why-h2">Why Choose Us?</h2>
+        <p class="section-sub">Everything your ministry needs — nothing you don't.</p>
+      </div>
+      <ul class="why-grid" role="list">
+
+        <li class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 20.5C5.2 15.3 1 11.2 1 7.5 1 4.4 3.4 2 6.5 2c1.7 0 3.3.8 4.5 2.1C12.2 2.8 13.8 2 15.5 2 18.6 2 21 4.4 21 7.5c0 3.7-4.2 7.8-10 13z" stroke="#1E3A8A" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Mission‑First Mindset</h3>
+          <p>We put your ministry before the technology.</p>
+        </li>
+
+        <li class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 2L2 7l9 5 9-5-9-5zM2 16l9 5 9-5M2 11.5l9 5 9-5" stroke="#1E3A8A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Fractional CTO</h3>
+          <p>Strategic roadmaps without the full‑time salary. Prioritization of projects and spending.</p>
+        </li>
+
+        <li class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="3" width="18" height="13" rx="2" stroke="#1E3A8A" stroke-width="1.6"/>
+              <path d="M7 19h8M11 16v3" stroke="#1E3A8A" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Microsoft 365 for Nonprofits</h3>
+          <p>Free/discounted licenses, migration, training, and ongoing support.</p>
+        </li>
+
+        <li class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 4.5H6a2 2 0 00-2 2v11a2 2 0 002 2h10a2 2 0 002-2v-11a2 2 0 00-2-2h-2M8 4.5a2 2 0 012-2h2a2 2 0 012 2M8 4.5h6m-5 7l2 2 3.5-3.5" stroke="#1E3A8A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>RAMP Expense System</h3>
+          <p>Seamless implementation, compliance, and real‑time reporting.</p>
+        </li>
+
+        <li class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 13h8v7l9-11h-8V2z" stroke="#1E3A8A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Process Automation</h3>
+          <p>Save staff hours with workflows built in Power Automate, Power Apps, and more.</p>
+        </li>
+
+        <li class="why-card">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 18h4v-2a3 3 0 00-4.9-2.3M16 18H6m10 0v-2a4.97 4.97 0 00-.3-1.7M6 18H2v-2a3 3 0 014.9-2.3M6 18v-2c0-.6.1-1.2.3-1.7m0 0a5 5 0 019.4 0M14 7a3 3 0 11-6 0 3 3 0 016 0z" stroke="#1E3A8A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Specialized for Churches &amp; NGOs</h3>
+          <p>We understand your unique governance, budgeting, and stewardship needs.</p>
+        </li>
+
+      </ul>
     </div>
   </section>
 
-  <main id="main-content">
-
-    <section class="section why-choose" aria-labelledby="why-heading">
-      <div class="container">
-        <div class="section__label">Why Tech 4 Truth</div>
-        <h2 id="why-heading" class="section__heading">Why Choose Us?</h2>
-        <ul class="why-grid" role="list">
-          <li class="why-card"><div class="why-card__icon" aria-hidden="true">✦</div><h3 class="why-card__title">Mission&#8209;First Mindset</h3><p>We put your ministry before the technology.</p></li>
-          <li class="why-card"><div class="why-card__icon" aria-hidden="true">◈</div><h3 class="why-card__title">Fractional CTO</h3><p>Strategic roadmaps without the full&#8209;time salary. Prioritization of projects and spending.</p></li>
-          <li class="why-card"><div class="why-card__icon" aria-hidden="true">▣</div><h3 class="why-card__title">Microsoft&thinsp;365 for Nonprofits</h3><p>Free/discounted licenses, migration, training, and ongoing support.</p></li>
-          <li class="why-card"><div class="why-card__icon" aria-hidden="true">◉</div><h3 class="why-card__title">RAMP Expense System</h3><p>Seamless implementation, compliance, and real&#8209;time reporting.</p></li>
-          <li class="why-card"><div class="why-card__icon" aria-hidden="true">⬡</div><h3 class="why-card__title">Process Automation</h3><p>Save staff hours with workflows built in Power&thinsp;Automate, Power&thinsp;Apps, and more.</p></li>
-          <li class="why-card"><div class="why-card__icon" aria-hidden="true">⛪</div><h3 class="why-card__title">Specialized for Churches &amp; NGOs</h3><p>We understand your unique governance, budgeting, and stewardship needs.</p></li>
-        </ul>
+  <!-- SERVICES -->
+  <section id="services" class="section" aria-labelledby="services-h2">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-label">What We Do</p>
+        <h2 id="services-h2">Our Services</h2>
+        <p class="section-sub">Four core offerings — one mission-aligned partner.</p>
       </div>
-    </section>
+      <div class="services-grid">
 
-    <section id="services" class="section services-section" aria-labelledby="services-heading">
-      <div class="container">
-        <div class="section__label">What We Do</div>
-        <h2 id="services-heading" class="section__heading">Our Services</h2>
-        <div class="services-grid">
-          <article class="service-card">
-            <div class="service-card__num" aria-hidden="true">01</div>
-            <h3 class="service-card__title"><a href="https://www.microsoft.com/en-us/microsoft-365/nonprofit" target="_blank" rel="noopener noreferrer">Microsoft 365 for Non&#8209;Profits</a></h3>
-            <ul class="service-card__list">
-              <li><strong>Eligibility &amp; Licensing:</strong> Help you claim the free/discounted Microsoft 365 Non&#8209;profit plan.</li>
-              <li><strong>Migration &amp; Deployment:</strong> Email, Teams, SharePoint, OneDrive — moved with zero downtime.</li>
-              <li><strong>Training &amp; Adoption:</strong> Tailored workshops for staff, volunteers, and leadership.</li>
-            </ul>
-          </article>
-          <article class="service-card">
-            <div class="service-card__num" aria-hidden="true">02</div>
-            <h3 class="service-card__title"><a href="https://www.ramp.com" target="_blank" rel="noopener noreferrer">RAMP Expense System Implementation</a></h3>
-            <ul class="service-card__list">
-              <li><strong>Setup &amp; Configuration:</strong> Align RAMP to your chart of accounts, grant codes, and approval hierarchies.</li>
-              <li><strong>Policy Integration:</strong> Embed your expense policies directly into the workflow.</li>
-              <li><strong>Reporting Dashboard:</strong> Real&#8209;time spend visibility for board and auditors.</li>
-            </ul>
-          </article>
-          <article class="service-card">
-            <div class="service-card__num" aria-hidden="true">03</div>
-            <h3 class="service-card__title">Process Automation</h3>
-            <ul class="service-card__list">
-              <li><strong>Workflow Design:</strong> Map manual steps and convert them into automated flows (Power&thinsp;Automate, Power&thinsp;Apps).</li>
-              <li><strong>Integration:</strong> Connect Microsoft&thinsp;365, RAMP, donor management, and accounting platforms.</li>
-              <li><strong>Continuous Improvement:</strong> Ongoing monitoring, analytics, and optimization.</li>
-            </ul>
-          </article>
-          <article class="service-card">
-            <div class="service-card__num" aria-hidden="true">04</div>
-            <h3 class="service-card__title">Fractional CTO</h3>
-            <ul class="service-card__list">
-              <li><strong>Strategic Planning:</strong> Technology vision, budgeting, and risk management.</li>
-              <li><strong>Architecture Review:</strong> Cloud, security, data, and integration assessments.</li>
-              <li><strong>Team Enablement:</strong> Mentoring IT staff, volunteer tech teams, and board education.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section how-it-works" aria-labelledby="how-heading">
-      <div class="container">
-        <div class="section__label">Our Process</div>
-        <h2 id="how-heading" class="section__heading">How It Works — A Simple 4&#8209;Step Journey</h2>
-        <ol class="steps-list" role="list">
-          <li class="step"><div class="step__num" aria-hidden="true">1</div><div class="step__content"><h3 class="step__title">Discovery Call <span class="step__meta">(15&thinsp;min)</span></h3><p>We learn about your mission, challenges, and tech environment.</p></div></li>
-          <li class="step"><div class="step__num" aria-hidden="true">2</div><div class="step__content"><h3 class="step__title">Free Tech Assessment</h3><p>A concise report with quick wins, cost&#8209;savings, and a roadmap.</p></div></li>
-          <li class="step"><div class="step__num" aria-hidden="true">3</div><div class="step__content"><h3 class="step__title">Implementation Plan</h3><p>Timeline, milestones, and responsibilities (no surprise fees).</p></div></li>
-          <li class="step"><div class="step__num" aria-hidden="true">4</div><div class="step__content"><h3 class="step__title">Launch &amp; Support</h3><p>Deploy, train, and hand&#8209;off with a 30&#8209;day "success guarantee."</p></div></li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="section testimonials-section" aria-labelledby="testimonials-heading">
-      <div class="container">
-        <div class="section__label">Real Results</div>
-        <h2 id="testimonials-heading" class="section__heading">Success Stories</h2>
-        <div class="testimonials-grid">
-          <article class="testimonial-card">
-            <blockquote><p>&#8220;Our church moved from paper&#8209;based expense reports to RAMP in just four weeks. We saved 12&thinsp;hours a week and have full audit&#8209;ready records.&#8221;</p></blockquote>
-            <cite>— Pastor Troy Nichols, Common Ground Community Church</cite>
-          </article>
-          <article class="testimonial-card">
-            <blockquote><p>&#8220;Migrated complex spreadsheets for event budgeting to SharePoint Online and Power BI. Reducing the time for budget evaluation and review to days instead of weeks.&#8221;</p></blockquote>
-            <cite>— Executive Director, Bryan Murphy — Pacific Southwest Covenant Church</cite>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="free-assessment" class="section get-started" aria-labelledby="get-started-heading">
-      <div class="container">
-        <div class="get-started__inner">
-          <div class="get-started__text">
-            <div class="section__label">Ready to Begin?</div>
-            <h2 id="get-started-heading" class="section__heading">Get Started Today</h2>
-            <p>Ready to modernize your ministry?</p>
-            <p class="note">We're a nonprofit serving nonprofits. All services are priced with mission sustainability in mind.</p>
+        <article class="service-card">
+          <div class="service-card-top">
+            <span class="service-num">01</span>
+            <h3><a href="https://www.microsoft.com/en-us/microsoft-365/nonprofit" target="_blank" rel="noopener noreferrer">Microsoft 365 for Non‑Profits</a></h3>
           </div>
-          <div class="get-started__actions">
-            <a href="https://outlook.office.com/bookwithme/me/meetingtype/new?title=1:1%20meetings&duration=30%20mins" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--lg">Book a Free Assessment</a>
-            <ul class="contact-list" role="list">
-              <li><span class="contact-list__label">Call us:</span> <a href="tel:+19165726638">(865)&thinsp;344&#8209;0557</a></li>
-              <li><span class="contact-list__label">Email:</span> <a href="mailto:ScottPorter@tech4truth.org">ScottPorter@tech4truth.org</a></li>
-            </ul>
+          <ul class="service-list">
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Eligibility &amp; Licensing:</strong> Help you claim the free/discounted Microsoft 365 Non‑profit plan.</div></li>
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Migration &amp; Deployment:</strong> Email, Teams, SharePoint, OneDrive — moved with zero downtime.</div></li>
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Training &amp; Adoption:</strong> Tailored workshops for staff, volunteers, and leadership.</div></li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card-top">
+            <span class="service-num">02</span>
+            <h3><a href="https://www.ramp.com" target="_blank" rel="noopener noreferrer">RAMP Expense System Implementation</a></h3>
+          </div>
+          <ul class="service-list">
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Setup &amp; Configuration:</strong> Align RAMP to your chart of accounts, grant codes, and approval hierarchies.</div></li>
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Policy Integration:</strong> Embed your expense policies directly into the workflow.</div></li>
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Reporting Dashboard:</strong> Real‑time spend visibility for board and auditors.</div></li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card-top">
+            <span class="service-num">03</span>
+            <h3>Process Automation</h3>
+          </div>
+          <ul class="service-list">
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Workflow Design:</strong> Map manual steps and convert them into automated flows (Power Automate, Power Apps).</div></li>
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Integration:</strong> Connect Microsoft 365, RAMP, donor management, and accounting platforms.</div></li>
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Continuous Improvement:</strong> Ongoing monitoring, analytics, and optimization.</div></li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-card-top">
+            <span class="service-num">04</span>
+            <h3>Fractional CTO</h3>
+          </div>
+          <ul class="service-list">
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Strategic Planning:</strong> Technology vision, budgeting, and risk management.</div></li>
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Architecture Review:</strong> Cloud, security, data, and integration assessments.</div></li>
+            <li><span class="sc-dot" aria-hidden="true"></span><div><strong>Team Enablement:</strong> Mentoring IT staff, volunteer tech teams, and board education.</div></li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-navy" aria-labelledby="how-h2">
+    <div class="container">
+      <div class="section-head section-head-inv">
+        <p class="section-label section-label-inv">Our Process</p>
+        <h2 id="how-h2">How It Works — A Simple 4‑Step Journey</h2>
+      </div>
+      <ol class="steps-grid" role="list">
+
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">01</div>
+          <h3>Discovery Call <span class="step-meta">(15 min)</span></h3>
+          <p>We learn about your mission, challenges, and tech environment.</p>
+        </li>
+
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">02</div>
+          <h3>Free Tech Assessment</h3>
+          <p>A concise report with quick wins, cost‑savings, and a roadmap.</p>
+        </li>
+
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">03</div>
+          <h3>Implementation Plan</h3>
+          <p>Timeline, milestones, and responsibilities — no surprise fees.</p>
+        </li>
+
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">04</div>
+          <h3>Launch &amp; Support</h3>
+          <p>Deploy, train, and hand‑off with a 30‑day "success guarantee."</p>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- SUCCESS STORIES -->
+  <section class="section" aria-labelledby="stories-h2">
+    <div class="container">
+      <div class="section-head">
+        <p class="section-label">Real Results</p>
+        <h2 id="stories-h2">Success Stories</h2>
+      </div>
+      <div class="testi-grid">
+
+        <article class="testi-card">
+          <div class="testi-quote-mark" aria-hidden="true">"</div>
+          <blockquote>
+            <p>Our church moved from paper‑based expense reports to RAMP in just four weeks. We saved 12 hours a week and have full audit‑ready records.</p>
+          </blockquote>
+          <footer>
+            <div class="testi-avatar" aria-hidden="true">TN</div>
+            <cite>
+              <strong>Pastor Troy Nichols</strong>
+              <span>Common Ground Community Church</span>
+            </cite>
+          </footer>
+        </article>
+
+        <article class="testi-card">
+          <div class="testi-quote-mark" aria-hidden="true">"</div>
+          <blockquote>
+            <p>Migrated complex spreadsheets for event budgeting to SharePoint Online and Power BI. Reducing the time for budget evaluation and review to days instead of weeks.</p>
+          </blockquote>
+          <footer>
+            <div class="testi-avatar" aria-hidden="true">BM</div>
+            <cite>
+              <strong>Bryan Murphy</strong>
+              <span>Executive Director, Pacific Southwest Covenant Church</span>
+            </cite>
+          </footer>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL STRIP -->
+  <div class="testi-strip" role="complementary" aria-label="Client quote">
+    <div class="container">
+      <blockquote class="strip-quote">
+        "We're a nonprofit serving nonprofits — all services are priced with mission sustainability in mind."
+        <cite>— ScottPorter@tech4truth.org · (865) 344-0557</cite>
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- GET STARTED -->
+  <section id="free-assessment" class="section section-tinted" aria-labelledby="cta-h2">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-text">
+          <p class="section-label">Ready to Begin?</p>
+          <h2 id="cta-h2">Get Started Today</h2>
+          <p>Ready to modernize your ministry?</p>
+          <p class="cta-note">We're a non‑profit serving non‑profits. All services are priced with mission sustainability in mind.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="https://outlook.office.com/bookwithme/me/meetingtype/new?title=1:1%20meetings&duration=30%20mins"
+             target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+            Book a Free Assessment
+          </a>
+          <div class="cta-contacts">
+            <a href="tel:+19165726638" class="cta-contact-row">
+              <div class="cta-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" stroke="#1E3A8A" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div>
+                <div class="cta-contact-lbl">Call us</div>
+                <div class="cta-contact-val">(865) 344-0557</div>
+              </div>
+            </a>
+            <a href="mailto:ScottPorter@tech4truth.org" class="cta-contact-row">
+              <div class="cta-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" fill="#1E3A8A"/>
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" fill="#1E3A8A"/>
+                </svg>
+              </div>
+              <div>
+                <div class="cta-contact-lbl">Email</div>
+                <div class="cta-contact-val">ScottPorter@tech4truth.org</div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
-      <div class="container">
-        <h2 id="contact-heading" class="section__heading">Contact Information</h2>
-        <p>If you are already a client and have questions or need support, please contact us by email at <a href="mailto:Support@tech4truth.org">Support@tech4truth.org</a>.</p>
+  <!-- CONTACT -->
+  <section id="contact" class="section section-contact" aria-labelledby="contact-h2">
+    <div class="container">
+      <h2 id="contact-h2">Contact Information</h2>
+      <p>If you are already a client and have questions or need support, please contact us by email at <a href="mailto:Support@tech4truth.org">Support@tech4truth.org</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <!-- Footer logo: adapted for dark background, includes signal arcs -->
+      <svg class="footer-logomark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="48" height="48" rx="24" fill="#1E3A8A"/>
+        <!-- Outer signal arcs -->
+        <path stroke="rgba(255,255,255,.2)" stroke-width="1.5" stroke-linecap="round" fill="none" d="M9,24 A20,20 0 0,1 30,4"/>
+        <path stroke="rgba(255,255,255,.2)" stroke-width="1.5" stroke-linecap="round" fill="none" d="M9,24 A20,20 0 0,0 30,44"/>
+        <!-- Mid signal arcs -->
+        <path stroke="rgba(255,255,255,.45)" stroke-width="1.5" stroke-linecap="round" fill="none" d="M13,24 A16,16 0 0,1 29,8"/>
+        <path stroke="rgba(255,255,255,.45)" stroke-width="1.5" stroke-linecap="round" fill="none" d="M13,24 A16,16 0 0,0 29,40"/>
+        <!-- Main circle -->
+        <circle cx="24" cy="24" r="11" stroke="rgba(255,255,255,.75)" stroke-width="2"/>
+        <!-- Checkmark -->
+        <path stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M17.5,24.5 L22,29 L30.5,18"/>
+      </svg>
+      <div>
+        <div class="footer-name">Tech<span>4</span>Truth</div>
+        <div class="footer-tagline">Mission Technology</div>
       </div>
-    </section>
+    </div>
 
-  </main>
-
-  <footer class="site-footer" role="contentinfo">
-    <div class="footer__inner container">
-      <div class="footer__brand">
-        <img src="t4tlogo.png" alt="Tech 4 Truth logo" width="36" height="36">
-        <span class="footer__wordmark">Tech<span class="accent"> 4 </span>Truth</span>
-      </div>
-      <nav class="footer__nav" aria-label="Footer navigation">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-head">Navigate</div>
         <a href="index.html">Home</a>
         <a href="https://forms.office.com/r/rHgca4dkD3?origin=lprLink" target="_blank" rel="noopener noreferrer">Organization Registration</a>
         <a href="https://apps.powerapps.com/play/e/14afab6a-be82-e32d-99c5-dfa75c329913/a/c020da64-d55d-436f-af72-918d4e600dee?tenantId=33cf58fe-e4bc-4098-992d-7e709dc91fcb&hint=8552fa02-c4b6-40a8-b7fd-8716d0ffaae9&sourcetime=1739842935840&hidenavbar=true#" target="_blank" rel="noopener noreferrer">File Uploads</a>
         <a href="privacy.html">Privacy</a>
-      </nav>
-      <address class="footer__address">491 Morris St<br>Newport, TN&thinsp;37821</address>
-      <p class="footer__copy">Copyright &copy; 2025 &mdash; All Rights Reserved</p>
-      <a href="#top" class="footer__back-top" aria-label="Back to top">&#8593; Top</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-head">Contact</div>
+        <a href="mailto:ScottPorter@tech4truth.org">ScottPorter@tech4truth.org</a>
+        <a href="mailto:Support@tech4truth.org">Support@tech4truth.org</a>
+        <a href="tel:+19165726638">(865) 344-0557</a>
+        <address>491 Morris St, Newport, TN 37821</address>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-head">Get Started</div>
+        <a href="https://outlook.office.com/bookwithme/me/meetingtype/new?title=1:1%20meetings&duration=30%20mins" target="_blank" rel="noopener noreferrer">Book a Free Assessment</a>
+        <a href="#free-assessment">Contact Us</a>
+      </div>
     </div>
-  </footer>
 
-  <script src="main.js"></script>
+  </div>
+  <div class="footer-bottom">
+    <span>Copyright &copy; 2025 — All Rights Reserved</span>
+    <a href="#top" class="footer-top" aria-label="Back to top">&#8593; Top</a>
+  </div>
+</footer>
+
+<script src="main.js"></script>
 </body>
 </html>
