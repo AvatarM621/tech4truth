@@ -570,6 +570,11 @@ address { font-style: normal; }
 }
 .footer-top:hover { background: rgba(147,197,253,.08); border-color: #93C5FD; color: #93C5FD; }
 
+/* ── SECTION-SPECIFIC OVERRIDES ── */
+/* 0.25in top margin for Why Choose Us and Services (0.25in = 24px at 96dpi) */
+[aria-labelledby="why-h2"],
+[aria-labelledby="services-h2"] { padding-top: 24px; }
+
 /* ── SCROLL ANIMATIONS ── */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
