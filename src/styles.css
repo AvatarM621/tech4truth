@@ -12,9 +12,9 @@
   --navy-100:    #DBEAFE;
   --navy-200:    #BFDBFE;
 
-  --sand:        #F7F5F0;
-  --sand-dk:     #EEE9DF;
-  --sand-border: #DDD8CF;
+  --sand:        #F5F5F5;   /* was #F7F5F0 */
+  --sand-dk:     #EBEBEB;   /* was #EEE9DF */
+  --sand-border: #D9D9D9;   /* was #DDD8CF */
 
   --ink:         #1C1208;
   --ink-70:      #4A4035;
